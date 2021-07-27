@@ -1,6 +1,6 @@
 {
   "name": "fluxlabs/fluxopenidconnectapi",
-  "description": "Flux Open Id Connect Api",
+  "description": "Open Id Connect",
   "type": "project",
   "keywords": [
     "connect",
