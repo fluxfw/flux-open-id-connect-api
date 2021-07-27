@@ -1,0 +1,6 @@
+*
+!docker-compose.yml
+!.gitignore
+!login.sh
+!logout.sh
+!userinfos.sh

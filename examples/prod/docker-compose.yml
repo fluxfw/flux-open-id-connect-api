@@ -1,0 +1,17 @@
+version: "3"
+services:
+  open-id-connect-api:
+    environment:
+      - FLUX_OPEN_ID_CONNECT_API_PROVIDER_URL=...
+      - FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_ID=...
+      - FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_SECRET=...
+      - FLUX_OPEN_ID_CONNECT_API_PROVIDER_REDIRECT_URI=https://%host%/callback
+      - FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET=...
+    image: docker-registry.fluxpublisher.ch/flux-open-id-connect/api:latest
+    restart: always
+  other-service:
+    depends_on:
+      - open-id-connect-api
+    environment:
+      [- FLUX_OPEN_ID_CONNECT_API_HOST=open-id-connect-api]
+      [- FLUX_OPEN_ID_CONNECT_API_PORT=9501]

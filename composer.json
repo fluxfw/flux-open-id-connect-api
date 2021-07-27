@@ -1,0 +1,29 @@
+{
+  "name": "fluxlabs/fluxopenidconnectapi",
+  "description": "Flux Open Id Connect Api",
+  "type": "project",
+  "keywords": [
+    "connect",
+    "id",
+    "open"
+  ],
+  "homepage": "https://github.com/fluxapps/FluxOpenIdConnectApi",
+  "license": "GPL-3.0-only",
+  "require": {
+    "php": ">=8.0",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-swoole": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fluxlabs\\FluxOpenIdConnectApi\\": "src/"
+    }
+  },
+  "config": {
+    "classmap-authoritative": true,
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
