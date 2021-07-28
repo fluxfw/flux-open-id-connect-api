@@ -33,7 +33,7 @@ class CookieConfigDto
     ) : static {
         $dto = new static();
 
-        $dto->name = $name ?? "open-id-connect";
+        $dto->name = $name ?? "auth";
         $dto->expires = $expires;
         $dto->path = $path ?? "/";
         $dto->domain = $domain;

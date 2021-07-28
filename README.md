@@ -20,7 +20,7 @@
 | FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_PLAIN | Bypass encrypt cookie for dev environment | false |
 | FLUX_OPEN_ID_CONNECT_API_ROUTE_AFTER_LOGIN_URL | Url to redirect after login | / |
 | FLUX_OPEN_ID_CONNECT_API_ROUTE_AFTER_LOGOUT_URL | Url to redirect after logout | / |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_NAME | Cookie name | open-id-connect |
+| FLUX_OPEN_ID_CONNECT_API_COOKIE_NAME | Cookie name | auth |
 | FLUX_OPEN_ID_CONNECT_API_COOKIE_EXPIRES | Cookie expires as timestamp | (Session end) |
 | FLUX_OPEN_ID_CONNECT_API_COOKIE_PATH | Cookie path | / |
 | FLUX_OPEN_ID_CONNECT_API_COOKIE_DOMAIN | Cookie domain | - |
