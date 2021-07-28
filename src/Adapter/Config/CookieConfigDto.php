@@ -15,7 +15,7 @@ class CookieConfigDto
     private ?int $expires;
     private bool $http_only;
     private string $name;
-    private ?string $path;
+    private string $path;
     private string $priority;
     private string $same_site;
     private bool $secure;
@@ -33,9 +33,9 @@ class CookieConfigDto
     ) : static {
         $dto = new static();
 
-        $dto->name = $name ?? "open-id-connect";
+        $dto->name = $name ?? "auth";
         $dto->expires = $expires;
-        $dto->path = $path;
+        $dto->path = $path ?? "/";
         $dto->domain = $domain;
         $dto->secure = $secure ?? true;
         $dto->http_only = $http_only ?? true;
@@ -64,7 +64,7 @@ class CookieConfigDto
     }
 
 
-    public function getPath() : ?string
+    public function getPath() : string
     {
         return $this->path;
     }
