@@ -119,7 +119,13 @@ class Server
                 $this->config->getCookieConfig()->getPriority()
             );
         } else {
-            $response->cookie($this->config->getCookieConfig()->getName());
+            $response->cookie(
+                $this->config->getCookieConfig()->getName(),
+                null,
+                null,
+                $this->config->getCookieConfig()->getPath(),
+                $this->config->getCookieConfig()->getDomain()
+            );
         }
 
         if (!empty($api_response->getRedirectUrl())) {
