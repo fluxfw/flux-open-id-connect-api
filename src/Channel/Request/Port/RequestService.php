@@ -4,7 +4,6 @@ namespace Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port;
 
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Command\RequestCommand;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Command\RequestCommandHandler;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Dto\ResponseDto;
 
 class RequestService
 {
