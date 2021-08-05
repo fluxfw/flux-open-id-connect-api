@@ -32,9 +32,25 @@ class GetOpenIdConfigCommandHandler
 
         return OpenIdConfigDto::new(
             $command->getProviderConfig(),
-            $config["authorization_endpoint"] ?? null,
-            $config["token_endpoint"] ?? null,
-            $config["userinfo_endpoint"] ?? null
+            $this->mapToProviderUrlProtocol($config["authorization_endpoint"] ?? null, $command->getProviderConfig()->getUrl()),
+            $this->mapToProviderUrlProtocol($config["token_endpoint"] ?? null, $command->getProviderConfig()->getUrl()),
+            $this->mapToProviderUrlProtocol($config["userinfo_endpoint"] ?? null, $command->getProviderConfig()->getUrl())
         );
+    }
+
+
+    private function mapToProviderUrlProtocol(?string $url, string $provider_url) : ?string
+    {
+        if (empty($url)) {
+            return $url;
+        }
+
+        $matches = [];
+        preg_match("/^https?:\/\//", $provider_url, $matches);
+        if (empty($matches)) {
+            return $url;
+        }
+
+        return preg_replace("/^https?:\/\//", $matches[0], $url);
     }
 }
