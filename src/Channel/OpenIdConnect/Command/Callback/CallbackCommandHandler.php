@@ -3,8 +3,8 @@
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback;
 
 use Exception;
+use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
@@ -13,17 +13,17 @@ use Throwable;
 class CallbackCommandHandler
 {
 
-    private ProviderConfigDto $provider_config;
+    private OpenIdConfigDto $open_id_config;
     private RequestService $request;
     private RouteConfigDto $route_config;
     private SessionCrypt $session_crypt;
 
 
-    public static function new(ProviderConfigDto $provider_config, RouteConfigDto $route_config, SessionCrypt $session_crypt, RequestService $request) : static
+    public static function new(OpenIdConfigDto $open_id_config, RouteConfigDto $route_config, SessionCrypt $session_crypt, RequestService $request) : static
     {
         $handler = new static();
 
-        $handler->provider_config = $provider_config;
+        $handler->open_id_config = $open_id_config;
         $handler->route_config = $route_config;
         $handler->session_crypt = $session_crypt;
         $handler->request = $request;
@@ -63,14 +63,14 @@ class CallbackCommandHandler
             }
 
             $data = [
-                "client_id"     => $this->provider_config->getClientId(),
-                "client_secret" => $this->provider_config->getClientSecret(),
+                "client_id"     => $this->open_id_config->getProviderConfig()->getClientId(),
+                "client_secret" => $this->open_id_config->getProviderConfig()->getClientSecret(),
                 "code"          => $code,
                 "grant_type"    => "authorization_code",
-                "redirect_uri"  => $this->provider_config->getRedirectUri()
+                "redirect_uri"  => $this->open_id_config->getProviderConfig()->getRedirectUri()
             ];
 
-            if ($this->provider_config->isSupportsPkce()) {
+            if ($this->open_id_config->getProviderConfig()->isSupportsPkce()) {
                 if (empty($code_verifier)) {
                     throw new Exception("Invalid code verifier");
                 }
@@ -78,15 +78,15 @@ class CallbackCommandHandler
                 $data["code_verifier"] = $code_verifier;
             }
 
-            $token_url = $this->provider_config->getUrl()
-                . "/oauth/token?"
+            $token_url = $this->open_id_config->getTokenEndpoint();
+            $token_url .= (str_contains($token_url, "?") ? "&" : "?")
                 . implode("&", array_map(fn(string $key, string $value) : string => $key . "=" . rawurlencode($value), array_keys($data), $data));
 
             $token = $this->request->request(
                 $token_url,
                 null,
                 $data,
-                $this->provider_config->isTrustSelfSignedCertificate()
+                $this->open_id_config->getProviderConfig()->isTrustSelfSignedCertificate()
             );
 
             if (empty($token_type = $token["token_type"]) || empty($access_token = $token["access_token"])) {

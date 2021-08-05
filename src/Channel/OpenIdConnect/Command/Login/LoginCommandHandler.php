@@ -2,22 +2,22 @@
 
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Login;
 
+use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
 class LoginCommandHandler
 {
 
-    private ProviderConfigDto $provider_config;
+    private OpenIdConfigDto $open_id_config;
     private SessionCrypt $session_crypt;
 
 
-    public static function new(ProviderConfigDto $provider_config, SessionCrypt $session_crypt) : static
+    public static function new(OpenIdConfigDto $open_id_config, SessionCrypt $session_crypt) : static
     {
         $handler = new static();
 
-        $handler->provider_config = $provider_config;
+        $handler->open_id_config = $open_id_config;
         $handler->session_crypt = $session_crypt;
 
         return $handler;
@@ -31,14 +31,14 @@ class LoginCommandHandler
         $session["state"] = $state = hash("sha256", rand() . microtime(true));
 
         $parameters = [
-            "client_id"     => $this->provider_config->getClientId(),
-            "redirect_uri"  => $this->provider_config->getRedirectUri(),
+            "client_id"     => $this->open_id_config->getProviderConfig()->getClientId(),
+            "redirect_uri"  => $this->open_id_config->getProviderConfig()->getRedirectUri(),
             "response_type" => "code",
             "state"         => $state,
-            "scope"         => $this->provider_config->getScope()
+            "scope"         => $this->open_id_config->getProviderConfig()->getScope()
         ];
 
-        if ($this->provider_config->isSupportsPkce()) {
+        if ($this->open_id_config->getProviderConfig()->isSupportsPkce()) {
             $session["code_verifier"] = $code_verifier = bin2hex(random_bytes(64));
 
             $parameters += [
@@ -47,8 +47,8 @@ class LoginCommandHandler
             ];
         }
 
-        $authorize_url = $this->provider_config->getUrl()
-            . "/oauth/authorize?"
+        $authorize_url = $this->open_id_config->getAuthorizationEndpoint();
+        $authorize_url .= (str_contains($authorize_url, "?") ? "&" : "?")
             . implode("&", array_map(fn(string $key, string $value) => $key . "=" . rawurlencode($value), array_keys($parameters), $parameters));
 
         return ResponseDto::new(

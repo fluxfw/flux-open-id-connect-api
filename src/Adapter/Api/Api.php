@@ -11,6 +11,7 @@ class Api
 {
 
     private Config $config;
+    private ?OpenIdConfigDto $open_id_config = null;
     private ?RequestService $request = null;
 
 
@@ -27,7 +28,7 @@ class Api
     public function callback(RequestDto $request) : ResponseDto
     {
         return OpenIdConnectService::new(
-            $this->config->getProviderConfig(),
+            $this->getOpenIdConfig(),
             $this->config->getRouteConfig(),
             $this->config->getSessionCrypt(),
             $this->getRequest()
@@ -41,7 +42,7 @@ class Api
     public function getUserInfos(RequestDto $request) : ResponseDto
     {
         return OpenIdConnectService::new(
-            $this->config->getProviderConfig(),
+            $this->getOpenIdConfig(),
             $this->config->getRouteConfig(),
             $this->config->getSessionCrypt(),
             $this->getRequest()
@@ -55,7 +56,7 @@ class Api
     public function login() : ResponseDto
     {
         return OpenIdConnectService::new(
-            $this->config->getProviderConfig(),
+            $this->getOpenIdConfig(),
             $this->config->getRouteConfig(),
             $this->config->getSessionCrypt(),
             $this->getRequest()
@@ -67,12 +68,28 @@ class Api
     public function logout() : ResponseDto
     {
         return OpenIdConnectService::new(
-            $this->config->getProviderConfig(),
+            $this->getOpenIdConfig(),
             $this->config->getRouteConfig(),
             $this->config->getSessionCrypt(),
             $this->getRequest()
         )
             ->logout();
+    }
+
+
+    private function getOpenIdConfig() : OpenIdConfigDto
+    {
+        $this->open_id_config ??= OpenIdConnectService::new(
+            OpenIdConfigDto::new(
+                $this->config->getProviderConfig()
+            ),
+            $this->config->getRouteConfig(),
+            $this->config->getSessionCrypt(),
+            $this->getRequest()
+        )
+            ->getOpenIdConfig();
+
+        return $this->open_id_config;
     }
 
 
