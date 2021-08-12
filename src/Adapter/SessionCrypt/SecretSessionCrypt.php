@@ -28,11 +28,11 @@ class SecretSessionCrypt implements SessionCrypt
     {
         $encrypted_session = base64_decode($encrypted_session);
 
-        if (empty($encrypted_session) || substr_count($encrypted_session, self::SEPARATOR) !== 1) {
+        if (empty($encrypted_session) || substr_count($encrypted_session, static::SEPARATOR) !== 1) {
             throw new Exception("Invalid encrypted session");
         }
 
-        [$value, $iv] = array_map("hex2bin", explode(self::SEPARATOR, $encrypted_session));
+        [$value, $iv] = array_map("hex2bin", explode(static::SEPARATOR, $encrypted_session));
 
         if (empty($value) || empty($iv)) {
             throw new Exception("Invalid encrypted session");
@@ -58,6 +58,6 @@ class SecretSessionCrypt implements SessionCrypt
             throw new Exception("OpenSSL error: " . openssl_error_string());
         }
 
-        return base64_encode(implode(self::SEPARATOR, array_map("bin2hex", [$value, $iv])));
+        return base64_encode(implode(static::SEPARATOR, array_map("bin2hex", [$value, $iv])));
     }
 }

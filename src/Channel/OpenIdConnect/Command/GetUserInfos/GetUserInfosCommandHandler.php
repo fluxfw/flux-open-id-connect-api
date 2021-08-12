@@ -3,7 +3,6 @@
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfos;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
@@ -29,12 +28,12 @@ class GetUserInfosCommandHandler
     }
 
 
-    public function handle(GetUserInfosCommand $command) : ResponseDto
+    public function handle(GetUserInfosCommand $command) : ?UserInfosDto
     {
         $user_infos = null;
         try {
             $session = $this->session_crypt->decryptAsJson(
-                $command->getRequest()->getEncryptedSession()
+                $command->getEncryptedSession()
             );
 
             $authorization = $session["authorization"] ?? null;
@@ -64,10 +63,6 @@ class GetUserInfosCommandHandler
             $user_infos = null;
         }
 
-        return ResponseDto::new(
-            $command->getRequest()->getEncryptedSession(),
-            null,
-            $user_infos
-        );
+        return $user_infos;
     }
 }

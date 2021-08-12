@@ -2,26 +2,32 @@
 
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\RequestDto;
-
 class CallbackCommand
 {
 
-    private RequestDto $request;
+    private ?string $encrypted_session;
+    private array $query;
 
 
-    public static function new(RequestDto $request) : static
+    public static function new(?string $encrypted_session, array $query) : static
     {
         $command = new static();
 
-        $command->request = $request;
+        $command->encrypted_session = $encrypted_session;
+        $command->query = $query;
 
         return $command;
     }
 
 
-    public function getRequest() : RequestDto
+    public function getEncryptedSession() : ?string
     {
-        return $this->request;
+        return $this->encrypted_session;
+    }
+
+
+    public function getQuery() : array
+    {
+        return $this->query;
     }
 }

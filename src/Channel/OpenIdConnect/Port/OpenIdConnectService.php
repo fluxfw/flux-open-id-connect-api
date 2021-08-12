@@ -3,8 +3,7 @@
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Port;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\RequestDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
+use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback\CallbackCommand;
@@ -41,7 +40,7 @@ class OpenIdConnectService
     }
 
 
-    public function callback(RequestDto $request) : ResponseDto
+    public function callback(?string $encrypted_session, array $query) : array
     {
         return CallbackCommandHandler::new(
             $this->open_id_config,
@@ -51,7 +50,8 @@ class OpenIdConnectService
         )
             ->handle(
                 CallbackCommand::new(
-                    $request
+                    $encrypted_session,
+                    $query
                 )
             );
     }
@@ -70,7 +70,7 @@ class OpenIdConnectService
     }
 
 
-    public function getUserInfos(RequestDto $request) : ResponseDto
+    public function getUserInfos(?string $encrypted_session) : ?UserInfosDto
     {
         return GetUserInfosCommandHandler::new(
             $this->open_id_config,
@@ -79,13 +79,13 @@ class OpenIdConnectService
         )
             ->handle(
                 GetUserInfosCommand::new(
-                    $request
+                    $encrypted_session
                 )
             );
     }
 
 
-    public function login() : ResponseDto
+    public function login() : array
     {
         return LoginCommandHandler::new(
             $this->open_id_config,
@@ -97,7 +97,7 @@ class OpenIdConnectService
     }
 
 
-    public function logout() : ResponseDto
+    public function logout() : string
     {
         return LogoutCommandHandler::new(
             $this->route_config
