@@ -2,7 +2,6 @@
 
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Logout;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 
 class LogoutCommandHandler
@@ -21,11 +20,8 @@ class LogoutCommandHandler
     }
 
 
-    public function handle(LogoutCommand $command) : ResponseDto
+    public function handle(LogoutCommand $command) : string
     {
-        return ResponseDto::new(
-            null,
-            $this->route_config->getAfterLogoutUrl()
-        );
+        return $this->route_config->getAfterLogoutUrl();
     }
 }

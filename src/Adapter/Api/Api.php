@@ -25,7 +25,7 @@ class Api
     }
 
 
-    public function callback(RequestDto $request) : ResponseDto
+    public function callback(?string $encrypted_session, array $query) : array
     {
         return OpenIdConnectService::new(
             $this->getOpenIdConfig(),
@@ -34,12 +34,13 @@ class Api
             $this->getRequest()
         )
             ->callback(
-                $request
+                $encrypted_session,
+                $query
             );
     }
 
 
-    public function getUserInfos(RequestDto $request) : ResponseDto
+    public function getUserInfos(?string $encrypted_session) : ?UserInfosDto
     {
         return OpenIdConnectService::new(
             $this->getOpenIdConfig(),
@@ -48,12 +49,12 @@ class Api
             $this->getRequest()
         )
             ->getUserInfos(
-                $request
+                $encrypted_session
             );
     }
 
 
-    public function login() : ResponseDto
+    public function login() : array
     {
         return OpenIdConnectService::new(
             $this->getOpenIdConfig(),
@@ -65,7 +66,7 @@ class Api
     }
 
 
-    public function logout() : ResponseDto
+    public function logout() : string
     {
         return OpenIdConnectService::new(
             $this->getOpenIdConfig(),

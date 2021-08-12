@@ -9,12 +9,19 @@
   ],
   "homepage": "https://github.com/fluxapps/FluxOpenIdConnectApi",
   "license": "GPL-3.0-only",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/fluxapps/FluxRestApi"
+    }
+  ],
   "require": {
     "php": ">=8.0",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-openssl": "*",
-    "ext-swoole": "*"
+    "ext-swoole": "*",
+    "fluxlabs/fluxrestapi": "dev-main"
   },
   "autoload": {
     "psr-4": {

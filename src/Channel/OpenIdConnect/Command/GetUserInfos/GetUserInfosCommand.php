@@ -2,26 +2,24 @@
 
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfos;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\RequestDto;
-
 class GetUserInfosCommand
 {
 
-    private RequestDto $request;
+    private ?string $encrypted_session;
 
 
-    public static function new(RequestDto $request) : static
+    public static function new(?string $encrypted_session) : static
     {
         $command = new static();
 
-        $command->request = $request;
+        $command->encrypted_session = $encrypted_session;
 
         return $command;
     }
 
 
-    public function getRequest() : RequestDto
+    public function getEncryptedSession() : ?string
     {
-        return $this->request;
+        return $this->encrypted_session;
     }
 }

@@ -4,7 +4,6 @@ namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback;
 
 use Exception;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
@@ -32,13 +31,13 @@ class CallbackCommandHandler
     }
 
 
-    public function handle(CallbackCommand $command) : ResponseDto
+    public function handle(CallbackCommand $command) : array
     {
         try {
             $session = $this->session_crypt->decryptAsJson(
-                $command->getRequest()->getEncryptedSession()
+                $command->getEncryptedSession()
             );
-            $get = $command->getRequest()->getGet();
+            $get = $command->getQuery();
 
             $session_state = $session["state"] ?? null;
             unset($session["state"]);
@@ -103,11 +102,11 @@ class CallbackCommandHandler
             $redirect_url = null;
         }
 
-        return ResponseDto::new(
+        return [
             $this->session_crypt->encryptAsJson(
                 $session
             ),
             $redirect_url
-        );
+        ];
     }
 }

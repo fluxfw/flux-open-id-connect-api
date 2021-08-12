@@ -3,7 +3,6 @@
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Login;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\ResponseDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
 class LoginCommandHandler
@@ -24,7 +23,7 @@ class LoginCommandHandler
     }
 
 
-    public function handle(LoginCommand $command) : ResponseDto
+    public function handle(LoginCommand $command) : array
     {
         $session = [];
 
@@ -51,11 +50,11 @@ class LoginCommandHandler
         $authorize_url .= (str_contains($authorize_url, "?") ? "&" : "?")
             . implode("&", array_map(fn(string $key, string $value) => $key . "=" . rawurlencode($value), array_keys($parameters), $parameters));
 
-        return ResponseDto::new(
+        return [
             $this->session_crypt->encryptAsJson(
                 $session
             ),
             $authorize_url
-        );
+        ];
     }
 }
