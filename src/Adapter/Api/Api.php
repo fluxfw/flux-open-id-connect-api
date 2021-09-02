@@ -25,7 +25,7 @@ class Api
     }
 
 
-    public function callback(?string $encrypted_session, array $query) : array
+    public function callback(?string $encrypted_session, array $query_params) : array
     {
         return OpenIdConnectService::new(
             $this->getOpenIdConfig(),
@@ -35,7 +35,7 @@ class Api
         )
             ->callback(
                 $encrypted_session,
-                $query
+                $query_params
             );
     }
 

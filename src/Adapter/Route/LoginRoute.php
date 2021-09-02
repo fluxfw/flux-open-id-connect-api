@@ -5,9 +5,12 @@ namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Route;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\Api;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\CookieConfigDto;
 use Fluxlabs\FluxRestApi\Cookie\CookieDto;
+use Fluxlabs\FluxRestApi\Header\Header;
+use Fluxlabs\FluxRestApi\Method\Method;
 use Fluxlabs\FluxRestApi\Request\RequestDto;
 use Fluxlabs\FluxRestApi\Response\ResponseDto;
 use Fluxlabs\FluxRestApi\Route\Route;
+use Fluxlabs\FluxRestApi\Status\Status;
 
 class LoginRoute implements Route
 {
@@ -27,7 +30,13 @@ class LoginRoute implements Route
     }
 
 
-    public function getBodyType() : ?string
+    public function getDocuRequestBodyTypes() : ?array
+    {
+        return null;
+    }
+
+
+    public function getDocuRequestQueryParams() : ?array
     {
         return null;
     }
@@ -35,7 +44,7 @@ class LoginRoute implements Route
 
     public function getMethod() : string
     {
-        return "GET";
+        return Method::GET;
     }
 
 
@@ -45,15 +54,15 @@ class LoginRoute implements Route
     }
 
 
-    public function handle(RequestDto $request) : ResponseDto
+    public function handle(RequestDto $request) : ?ResponseDto
     {
         [$encrypted_session, $authorize_url] = $this->api->login();
 
         return ResponseDto::new(
             null,
-            302,
+            Status::_302,
             [
-                "Location" => $authorize_url
+                Header::LOCATION => $authorize_url
             ],
             [
                 CookieDto::new(

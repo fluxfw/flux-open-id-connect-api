@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfos;
+namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
@@ -8,7 +8,7 @@ use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use Throwable;
 
-class GetUserInfosCommandHandler
+class GetUserInfosCommand
 {
 
     private OpenIdConfigDto $open_id_config;
@@ -18,22 +18,22 @@ class GetUserInfosCommandHandler
 
     public static function new(OpenIdConfigDto $open_id_config, SessionCrypt $session_crypt, RequestService $request) : static
     {
-        $handler = new static();
+        $command = new static();
 
-        $handler->open_id_config = $open_id_config;
-        $handler->session_crypt = $session_crypt;
-        $handler->request = $request;
+        $command->open_id_config = $open_id_config;
+        $command->session_crypt = $session_crypt;
+        $command->request = $request;
 
-        return $handler;
+        return $command;
     }
 
 
-    public function handle(GetUserInfosCommand $command) : ?UserInfosDto
+    public function getUserInfos(?string $encrypted_session) : ?UserInfosDto
     {
         $user_infos = null;
         try {
             $session = $this->session_crypt->decryptAsJson(
-                $command->getEncryptedSession()
+                $encrypted_session
             );
 
             $authorization = $session["authorization"] ?? null;

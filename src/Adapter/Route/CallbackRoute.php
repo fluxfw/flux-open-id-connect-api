@@ -4,10 +4,14 @@ namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Route;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\Api;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\CookieConfigDto;
+use Fluxlabs\FluxRestApi\Body\TextBodyDto;
 use Fluxlabs\FluxRestApi\Cookie\CookieDto;
+use Fluxlabs\FluxRestApi\Header\Header;
+use Fluxlabs\FluxRestApi\Method\Method;
 use Fluxlabs\FluxRestApi\Request\RequestDto;
 use Fluxlabs\FluxRestApi\Response\ResponseDto;
 use Fluxlabs\FluxRestApi\Route\Route;
+use Fluxlabs\FluxRestApi\Status\Status;
 
 class CallbackRoute implements Route
 {
@@ -27,15 +31,26 @@ class CallbackRoute implements Route
     }
 
 
-    public function getBodyType() : ?string
+    public function getDocuRequestBodyTypes() : ?array
     {
         return null;
     }
 
 
+    public function getDocuRequestQueryParams() : ?array
+    {
+        return [
+            "code",
+            "error",
+            "error_description",
+            "state"
+        ];
+    }
+
+
     public function getMethod() : string
     {
-        return "GET";
+        return Method::GET;
     }
 
 
@@ -45,21 +60,21 @@ class CallbackRoute implements Route
     }
 
 
-    public function handle(RequestDto $request) : ResponseDto
+    public function handle(RequestDto $request) : ?ResponseDto
     {
         [$encrypted_session, $redirect_url] = $this->api->callback(
             $request->getCookie(
                 $this->cookie_config->getName()
             ),
-            $request->getQuery()
+            $request->getQueryParams()
         );
 
         if ($redirect_url !== null) {
             return ResponseDto::new(
                 null,
-                302,
+                Status::_302,
                 [
-                    "Location" => $redirect_url
+                    Header::LOCATION => $redirect_url
                 ],
                 [
                     CookieDto::new(
@@ -77,8 +92,10 @@ class CallbackRoute implements Route
             );
         } else {
             return ResponseDto::new(
-                null,
-                401,
+                TextBodyDto::new(
+                    "Invalid authorization"
+                ),
+                Status::_403,
                 null,
                 [
                     CookieDto::new(

@@ -5,9 +5,12 @@ namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Route;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\Api;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\CookieConfigDto;
 use Fluxlabs\FluxRestApi\Body\JsonBodyDto;
+use Fluxlabs\FluxRestApi\Body\TextBodyDto;
+use Fluxlabs\FluxRestApi\Method\Method;
 use Fluxlabs\FluxRestApi\Request\RequestDto;
 use Fluxlabs\FluxRestApi\Response\ResponseDto;
 use Fluxlabs\FluxRestApi\Route\Route;
+use Fluxlabs\FluxRestApi\Status\Status;
 
 class UserInfosRoute implements Route
 {
@@ -27,7 +30,13 @@ class UserInfosRoute implements Route
     }
 
 
-    public function getBodyType() : ?string
+    public function getDocuRequestBodyTypes() : ?array
+    {
+        return null;
+    }
+
+
+    public function getDocuRequestQueryParams() : ?array
     {
         return null;
     }
@@ -35,7 +44,7 @@ class UserInfosRoute implements Route
 
     public function getMethod() : string
     {
-        return "GET";
+        return Method::GET;
     }
 
 
@@ -45,7 +54,7 @@ class UserInfosRoute implements Route
     }
 
 
-    public function handle(RequestDto $request) : ResponseDto
+    public function handle(RequestDto $request) : ?ResponseDto
     {
         $user_infos = $this->api->getUserInfos(
             $request->getCookie(
@@ -61,8 +70,10 @@ class UserInfosRoute implements Route
             );
         } else {
             return ResponseDto::new(
-                null,
-                401
+                TextBodyDto::new(
+                    "Authorization needed"
+                ),
+                Status::_401
             );
         }
     }

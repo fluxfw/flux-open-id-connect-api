@@ -5,8 +5,8 @@ namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Server;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\Api;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\Config;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\EnvConfig;
-use Fluxlabs\FluxRestApi\Handler\SwooleHandler;
-use Fluxlabs\FluxRestApi\Route\Collector\FolderRouteCollector;
+use Fluxlabs\FluxRestApi\Adapter\Collector\FolderRouteCollector;
+use Fluxlabs\FluxRestApi\Adapter\Handler\SwooleHandler;
 use Swoole\Http\Server as SwooleServer;
 
 class Server

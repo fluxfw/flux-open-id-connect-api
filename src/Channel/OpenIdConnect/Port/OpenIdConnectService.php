@@ -6,16 +6,11 @@ use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback\CallbackCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback\CallbackCommandHandler;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetOpenIdConfig\GetOpenIdConfigCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetOpenIdConfig\GetOpenIdConfigCommandHandler;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfos\GetUserInfosCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfos\GetUserInfosCommandHandler;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Login\LoginCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Login\LoginCommandHandler;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Logout\LogoutCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Logout\LogoutCommandHandler;
+use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\CallbackCommand;
+use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetOpenIdConfigCommand;
+use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfosCommand;
+use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\LoginCommand;
+use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\LogoutCommand;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 
 class OpenIdConnectService
@@ -40,70 +35,60 @@ class OpenIdConnectService
     }
 
 
-    public function callback(?string $encrypted_session, array $query) : array
+    public function callback(?string $encrypted_session, array $query_params) : array
     {
-        return CallbackCommandHandler::new(
+        return CallbackCommand::new(
             $this->open_id_config,
             $this->route_config,
             $this->session_crypt,
             $this->request
         )
-            ->handle(
-                CallbackCommand::new(
-                    $encrypted_session,
-                    $query
-                )
+            ->callback(
+                $encrypted_session,
+                $query_params
             );
     }
 
 
     public function getOpenIdConfig() : OpenIdConfigDto
     {
-        return GetOpenIdConfigCommandHandler::new(
+        return GetOpenIdConfigCommand::new(
             $this->request
         )
-            ->handle(
-                GetOpenIdConfigCommand::new(
-                    $this->open_id_config->getProviderConfig()
-                )
+            ->getOpenIdConfig(
+                $this->open_id_config->getProviderConfig()
             );
     }
 
 
     public function getUserInfos(?string $encrypted_session) : ?UserInfosDto
     {
-        return GetUserInfosCommandHandler::new(
+        return GetUserInfosCommand::new(
             $this->open_id_config,
             $this->session_crypt,
             $this->request
         )
-            ->handle(
-                GetUserInfosCommand::new(
-                    $encrypted_session
-                )
+            ->getUserInfos(
+                $encrypted_session
             );
     }
 
 
     public function login() : array
     {
-        return LoginCommandHandler::new(
+        return LoginCommand::new(
             $this->open_id_config,
             $this->session_crypt
         )
-            ->handle(
-                LoginCommand::new()
-            );
+            ->login();
     }
 
 
     public function logout() : string
     {
-        return LogoutCommandHandler::new(
+        return LogoutCommand::new(
             $this->route_config
         )
-            ->handle(
-                LogoutCommand::new()
-            );
+            ->logout();
     }
 }
