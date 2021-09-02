@@ -1,11 +1,11 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Login;
+namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
-class LoginCommandHandler
+class LoginCommand
 {
 
     private OpenIdConfigDto $open_id_config;
@@ -14,16 +14,16 @@ class LoginCommandHandler
 
     public static function new(OpenIdConfigDto $open_id_config, SessionCrypt $session_crypt) : static
     {
-        $handler = new static();
+        $command = new static();
 
-        $handler->open_id_config = $open_id_config;
-        $handler->session_crypt = $session_crypt;
+        $command->open_id_config = $open_id_config;
+        $command->session_crypt = $session_crypt;
 
-        return $handler;
+        return $command;
     }
 
 
-    public function handle(LoginCommand $command) : array
+    public function login() : array
     {
         $session = [];
 

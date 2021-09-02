@@ -1,10 +1,10 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Logout;
+namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 
-class LogoutCommandHandler
+class LogoutCommand
 {
 
     private RouteConfigDto $route_config;
@@ -12,15 +12,15 @@ class LogoutCommandHandler
 
     public static function new(RouteConfigDto $route_config) : static
     {
-        $handler = new static();
+        $command = new static();
 
-        $handler->route_config = $route_config;
+        $command->route_config = $route_config;
 
-        return $handler;
+        return $command;
     }
 
 
-    public function handle(LogoutCommand $command) : string
+    public function logout() : string
     {
         return $this->route_config->getAfterLogoutUrl();
     }

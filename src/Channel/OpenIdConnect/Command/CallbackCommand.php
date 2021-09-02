@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\Callback;
+namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Exception;
 use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
@@ -9,7 +9,7 @@ use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use Throwable;
 
-class CallbackCommandHandler
+class CallbackCommand
 {
 
     private OpenIdConfigDto $open_id_config;
@@ -20,24 +20,23 @@ class CallbackCommandHandler
 
     public static function new(OpenIdConfigDto $open_id_config, RouteConfigDto $route_config, SessionCrypt $session_crypt, RequestService $request) : static
     {
-        $handler = new static();
+        $command = new static();
 
-        $handler->open_id_config = $open_id_config;
-        $handler->route_config = $route_config;
-        $handler->session_crypt = $session_crypt;
-        $handler->request = $request;
+        $command->open_id_config = $open_id_config;
+        $command->route_config = $route_config;
+        $command->session_crypt = $session_crypt;
+        $command->request = $request;
 
-        return $handler;
+        return $command;
     }
 
 
-    public function handle(CallbackCommand $command) : array
+    public function callback(?string $encrypted_session, array $query_params) : array
     {
         try {
             $session = $this->session_crypt->decryptAsJson(
-                $command->getEncryptedSession()
+                $encrypted_session
             );
-            $get = $command->getQuery();
 
             $session_state = $session["state"] ?? null;
             unset($session["state"]);
@@ -45,19 +44,19 @@ class CallbackCommandHandler
             $code_verifier = $session["code_verifier"] ?? null;
             unset($session["code_verifier"]);
 
-            if (!empty($error_description = $get["error_description"] ?? null)) {
+            if (!empty($error_description = $query_params["error_description"] ?? null)) {
                 throw new Exception("Get error description: " . $error_description);
             }
 
-            if (!empty($error = $get["error"] ?? null)) {
+            if (!empty($error = $query_params["error"] ?? null)) {
                 throw new Exception("Get error: " . $error);
             }
 
-            if (empty($code = $get["code"] ?? null)) {
+            if (empty($code = $query_params["code"] ?? null)) {
                 throw new Exception("Invalid code");
             }
 
-            if (empty($get_state = $get["state"] ?? null) || empty($session_state) || $session_state !== $get_state) {
+            if (empty($query_state = $query_params["state"] ?? null) || empty($session_state) || $session_state !== $query_state) {
                 throw new Exception("Invalid state");
             }
 

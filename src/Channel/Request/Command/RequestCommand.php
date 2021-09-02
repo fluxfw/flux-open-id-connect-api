@@ -2,48 +2,73 @@
 
 namespace Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Command;
 
+use Exception;
+use Fluxlabs\FluxRestApi\Header\Header;
+
 class RequestCommand
 {
 
-    private ?string $authorization;
-    private ?array $post_data;
-    private bool $trust_self_signed_certificate;
-    private string $url;
-
-
-    public static function new(string $url, ?string $authorization, ?array $post_data, ?bool $trust_self_signed_certificate) : static
+    public static function new() : static
     {
         $command = new static();
-
-        $command->url = $url;
-        $command->authorization = $authorization;
-        $command->post_data = $post_data;
-        $command->trust_self_signed_certificate = $trust_self_signed_certificate ?? false;
 
         return $command;
     }
 
 
-    public function getAuthorization() : ?string
+    public function request(string $url, ?string $authorization, ?array $post_data, ?bool $trust_self_signed_certificate) : array
     {
-        return $this->authorization;
-    }
+        $curl = null;
+        try {
+            $curl = curl_init($url);
 
+            $headers = [
+                Header::ACCEPT     => "application/json",
+                Header::USER_AGENT => "FluxOpenIdConnectApi"
+            ];
 
-    public function getPostData() : ?array
-    {
-        return $this->post_data;
-    }
+            if (!empty($authorization)) {
+                $headers[Header::AUTHORIZATION] = $authorization;
+            }
 
+            if (!empty($post_data)) {
+                $headers[Header::CONTENT_TYPE] = "application/json";
 
-    public function getUrl() : string
-    {
-        return $this->url;
-    }
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($post_data, JSON_UNESCAPED_SLASHES));
+            }
 
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array_map(fn(string $key, string $value) : string => $key . ": " . $value, array_keys($headers), $headers));
 
-    public function isTrustSelfSignedCertificate() : bool
-    {
-        return $this->trust_self_signed_certificate;
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            if ($trust_self_signed_certificate) {
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl, CURLOPT_PROXY_SSL_VERIFYHOST, false);
+            }
+
+            $response = curl_exec($curl);
+
+            if (empty($response) || empty($response = json_decode($response, true))) {
+                throw new Exception("Invalid response");
+            }
+
+            if (!empty($error_description = $response["error_description"] ?? null)) {
+                throw new Exception("Request error description: " . $error_description);
+            }
+
+            if (!empty($error = $response["error"] ?? null)) {
+                throw new Exception("Request error: " . $error);
+            }
+
+            if (!empty($message = $response["message"] ?? null)) {
+                throw new Exception("Request message: " . $message);
+            }
+
+            return (array) $response;
+        } finally {
+            if ($curl !== null) {
+                curl_close($curl);
+            }
+        }
     }
 }
