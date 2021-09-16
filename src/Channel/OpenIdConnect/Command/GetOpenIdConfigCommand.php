@@ -33,9 +33,18 @@ class GetOpenIdConfigCommand
 
         return OpenIdConfigDto::new(
             $provider_config,
-            $this->mapToProviderUrlProtocol($config["authorization_endpoint"] ?? null, $provider_config->getUrl()),
-            $this->mapToProviderUrlProtocol($config["token_endpoint"] ?? null, $provider_config->getUrl()),
-            $this->mapToProviderUrlProtocol($config["userinfo_endpoint"] ?? null, $provider_config->getUrl())
+            $this->mapToProviderUrlProtocol(
+                $config["authorization_endpoint"] ?? null,
+                $provider_config->getUrl()
+            ),
+            $this->mapToProviderUrlProtocol(
+                $config["token_endpoint"] ?? null,
+                $provider_config->getUrl()
+            ),
+            $this->mapToProviderUrlProtocol(
+                $config["userinfo_endpoint"] ?? null,
+                $provider_config->getUrl()
+            )
         );
     }
 
