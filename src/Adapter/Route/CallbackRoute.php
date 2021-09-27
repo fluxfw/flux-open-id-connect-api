@@ -80,7 +80,7 @@ class CallbackRoute implements Route
                     CookieDto::new(
                         $this->cookie_config->getName(),
                         $encrypted_session,
-                        $this->cookie_config->getExpires(),
+                        $this->cookie_config->getExpiresIn(),
                         $this->cookie_config->getPath(),
                         $this->cookie_config->getDomain(),
                         $this->cookie_config->isSecure(),

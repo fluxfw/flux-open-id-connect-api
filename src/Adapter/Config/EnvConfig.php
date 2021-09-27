@@ -30,7 +30,7 @@ class EnvConfig implements Config
     {
         $this->cookie_config ??= CookieConfigDto::new(
             $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_NAME"] ?? null,
-            $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_EXPIRES"] ?? null,
+            $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_EXPIRES_IN"] ?? null,
             $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_PATH"] ?? null,
             $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_DOMAIN"] ?? null,
             ($secure = $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_SECURE"] ?? null) !== null ? in_array($secure, ["true", "1"]) : null,
