@@ -1,6 +1,6 @@
 *
-!docker-compose.yml
 !.gitignore
+!docker-compose.yml
 !login.sh
 !logout.sh
 !userinfos.sh

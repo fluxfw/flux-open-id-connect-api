@@ -1,4 +1,7 @@
-.*
-Dockerfile
-examples
-vendor
+*
+!bin
+!bin/**
+!src
+!src/**
+!composer.json
+!composer.lock
