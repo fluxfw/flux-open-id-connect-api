@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port;
+namespace FluxOpenIdConnectApi\Channel\Request\Port;
 
-use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Command\RequestCommand;
+use FluxOpenIdConnectApi\Channel\Request\Command\RequestCommand;
 
 class RequestService
 {

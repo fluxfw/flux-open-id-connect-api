@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
+namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 
 class LogoutCommand
 {

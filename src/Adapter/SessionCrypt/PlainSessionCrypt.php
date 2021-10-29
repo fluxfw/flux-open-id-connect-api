@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt;
+namespace FluxOpenIdConnectApi\Adapter\SessionCrypt;
 
 class PlainSessionCrypt implements SessionCrypt
 {

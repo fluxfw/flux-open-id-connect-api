@@ -1,9 +1,9 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
+namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
 class LoginCommand
 {

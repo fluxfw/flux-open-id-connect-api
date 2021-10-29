@@ -1,12 +1,12 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
+namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Exception;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use Throwable;
 
 class CallbackCommand

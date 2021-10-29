@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Api;
+namespace FluxOpenIdConnectApi\Adapter\Api;
 
 use JsonSerializable;
 
