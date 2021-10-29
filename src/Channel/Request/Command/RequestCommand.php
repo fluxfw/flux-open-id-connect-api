@@ -3,6 +3,7 @@
 namespace FluxOpenIdConnectApi\Channel\Request\Command;
 
 use Exception;
+use FluxRestApi\Body\BodyType;
 use FluxRestApi\Header\Header;
 
 class RequestCommand
@@ -32,7 +33,7 @@ class RequestCommand
             }
 
             if (!empty($post_data)) {
-                $headers[Header::CONTENT_TYPE] = "application/json";
+                $headers[Header::CONTENT_TYPE] = BodyType::JSON;
 
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($post_data, JSON_UNESCAPED_SLASHES));
             }
