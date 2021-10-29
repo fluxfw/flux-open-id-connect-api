@@ -7,6 +7,6 @@ COPY . /FluxOpenIdConnectApi
 
 ENTRYPOINT ["/FluxOpenIdConnectApi/bin/entrypoint.php"]
 
-RUN composer install -d /FluxOpenIdConnectApi --no-dev
+RUN /FluxOpenIdConnectApi/bin/build.sh
 
 EXPOSE 9501
