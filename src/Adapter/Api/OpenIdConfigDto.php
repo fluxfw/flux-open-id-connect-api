@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Api;
+namespace FluxOpenIdConnectApi\Adapter\Api;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
 
 class OpenIdConfigDto
 {

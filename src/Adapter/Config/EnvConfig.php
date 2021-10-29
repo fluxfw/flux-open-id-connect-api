@@ -1,10 +1,10 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Config;
+namespace FluxOpenIdConnectApi\Adapter\Config;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SecretSessionCrypt;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SecretSessionCrypt;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
 class EnvConfig implements Config
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Command;
+namespace FluxOpenIdConnectApi\Channel\Request\Command;
 
 use Exception;
-use Fluxlabs\FluxRestApi\Header\Header;
+use FluxRestApi\Header\Header;
 
 class RequestCommand
 {

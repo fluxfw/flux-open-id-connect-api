@@ -1,11 +1,11 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Api;
+namespace FluxOpenIdConnectApi\Adapter\Api;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\Config;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\EnvConfig;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Adapter\Config\Config;
+use FluxOpenIdConnectApi\Adapter\Config\EnvConfig;
+use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
+use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 
 class Api
 {

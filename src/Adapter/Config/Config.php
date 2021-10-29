@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Config;
+namespace FluxOpenIdConnectApi\Adapter\Config;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
 interface Config
 {

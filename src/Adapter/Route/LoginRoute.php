@@ -1,16 +1,16 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Route;
+namespace FluxOpenIdConnectApi\Adapter\Route;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\Api;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\CookieConfigDto;
-use Fluxlabs\FluxRestApi\Cookie\CookieDto;
-use Fluxlabs\FluxRestApi\Header\Header;
-use Fluxlabs\FluxRestApi\Method\Method;
-use Fluxlabs\FluxRestApi\Request\RequestDto;
-use Fluxlabs\FluxRestApi\Response\ResponseDto;
-use Fluxlabs\FluxRestApi\Route\Route;
-use Fluxlabs\FluxRestApi\Status\Status;
+use FluxOpenIdConnectApi\Adapter\Api\Api;
+use FluxOpenIdConnectApi\Adapter\Config\CookieConfigDto;
+use FluxRestApi\Cookie\CookieDto;
+use FluxRestApi\Header\Header;
+use FluxRestApi\Method\Method;
+use FluxRestApi\Request\RequestDto;
+use FluxRestApi\Response\ResponseDto;
+use FluxRestApi\Route\Route;
+use FluxRestApi\Status\Status;
 
 class LoginRoute implements Route
 {

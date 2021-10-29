@@ -1,9 +1,9 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt;
+namespace FluxOpenIdConnectApi\Adapter\SessionCrypt;
 
 use Exception;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\SessionCryptConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\SessionCryptConfigDto;
 
 class SecretSessionCrypt implements SessionCrypt
 {

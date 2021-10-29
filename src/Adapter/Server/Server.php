@@ -1,12 +1,12 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Adapter\Server;
+namespace FluxOpenIdConnectApi\Adapter\Server;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\Api;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\Config;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\EnvConfig;
-use Fluxlabs\FluxRestApi\Adapter\Collector\FolderRouteCollector;
-use Fluxlabs\FluxRestApi\Adapter\Handler\SwooleHandler;
+use FluxOpenIdConnectApi\Adapter\Api\Api;
+use FluxOpenIdConnectApi\Adapter\Config\Config;
+use FluxOpenIdConnectApi\Adapter\Config\EnvConfig;
+use FluxRestApi\Adapter\Collector\FolderRouteCollector;
+use FluxRestApi\Adapter\Handler\SwooleHandler;
 use Swoole\Http\Server as SwooleServer;
 
 class Server

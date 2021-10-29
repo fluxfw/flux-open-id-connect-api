@@ -1,17 +1,17 @@
 <?php
 
-namespace Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Port;
+namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Port;
 
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
-use Fluxlabs\FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\CallbackCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetOpenIdConfigCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfosCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\LoginCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\LogoutCommand;
-use Fluxlabs\FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
+use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\CallbackCommand;
+use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetOpenIdConfigCommand;
+use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfosCommand;
+use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\LoginCommand;
+use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\LogoutCommand;
+use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 
 class OpenIdConnectService
 {
