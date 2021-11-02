@@ -3,5 +3,4 @@
 !bin/**
 !src
 !src/**
-!composer.json
-!composer.lock
+!autoload.php
