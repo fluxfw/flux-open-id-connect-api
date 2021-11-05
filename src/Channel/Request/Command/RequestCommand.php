@@ -3,8 +3,8 @@
 namespace FluxOpenIdConnectApi\Channel\Request\Command;
 
 use Exception;
-use FluxRestApi\Body\BodyType;
-use FluxRestApi\Header\Header;
+use FluxRestBaseApi\Body\BodyType;
+use FluxRestBaseApi\Header\Header;
 
 class RequestCommand
 {
@@ -24,7 +24,7 @@ class RequestCommand
             $curl = curl_init($url);
 
             $headers = [
-                Header::ACCEPT     => "application/json",
+                Header::ACCEPT     => BodyType::JSON,
                 Header::USER_AGENT => "FluxOpenIdConnectApi"
             ];
 

@@ -6,12 +6,12 @@ use FluxOpenIdConnectApi\Adapter\Api\Api;
 use FluxOpenIdConnectApi\Adapter\Config\CookieConfigDto;
 use FluxRestApi\Body\TextBodyDto;
 use FluxRestApi\Cookie\CookieDto;
-use FluxRestApi\Header\Header;
-use FluxRestApi\Method\Method;
 use FluxRestApi\Request\RequestDto;
 use FluxRestApi\Response\ResponseDto;
 use FluxRestApi\Route\Route;
-use FluxRestApi\Status\Status;
+use FluxRestBaseApi\Header\Header;
+use FluxRestBaseApi\Method\Method;
+use FluxRestBaseApi\Status\Status;
 
 class CallbackRoute implements Route
 {
