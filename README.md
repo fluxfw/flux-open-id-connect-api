@@ -1,4 +1,4 @@
-# FluxOpenIdConnectApi
+# flux-open-id-connect-api
 
 ## Environment variables
 
