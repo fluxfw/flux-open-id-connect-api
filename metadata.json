@@ -1,9 +1,25 @@
 {
   "description": "Open Id Connect",
   "keywords": [
+    "alpine",
+    "api",
+    "auth",
+    "authentication",
+    "authorization",
     "connect",
+    "docker",
     "id",
-    "open"
+    "info",
+    "infos",
+    "login",
+    "logout",
+    "open",
+    "openid",
+    "openidconnect",
+    "php",
+    "rest",
+    "swoole",
+    "user"
   ],
   "homepage": "https://github.com/fluxapps/flux-open-id-connect-api"
 }
