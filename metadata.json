@@ -9,8 +9,6 @@
     "connect",
     "docker",
     "id",
-    "info",
-    "infos",
     "login",
     "logout",
     "open",
