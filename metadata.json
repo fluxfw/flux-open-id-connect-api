@@ -1,6 +1,6 @@
 {
   "description": "Open Id Connect",
-  "keywords": [
+  "topics": [
     "alpine",
     "api",
     "auth",
