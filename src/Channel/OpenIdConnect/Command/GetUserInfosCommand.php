@@ -11,9 +11,9 @@ use Throwable;
 class GetUserInfosCommand
 {
 
-    private OpenIdConfigDto $open_id_config;
-    private RequestService $request;
-    private SessionCrypt $session_crypt;
+    private readonly OpenIdConfigDto $open_id_config;
+    private readonly RequestService $request;
+    private readonly SessionCrypt $session_crypt;
 
 
     public static function new(OpenIdConfigDto $open_id_config, SessionCrypt $session_crypt, RequestService $request) : static

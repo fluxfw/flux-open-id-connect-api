@@ -5,13 +5,13 @@ namespace FluxOpenIdConnectApi\Adapter\Config;
 class ProviderConfigDto
 {
 
-    private string $client_id;
-    private string $client_secret;
-    private string $redirect_uri;
-    private string $scope;
-    private bool $supports_pkce;
-    private bool $trust_self_signed_certificate;
-    private string $url;
+    private readonly string $client_id;
+    private readonly string $client_secret;
+    private readonly string $redirect_uri;
+    private readonly string $scope;
+    private readonly bool $supports_pkce;
+    private readonly bool $trust_self_signed_certificate;
+    private readonly string $url;
 
 
     public static function new(string $url, string $client_id, string $client_secret, string $redirect_uri, ?string $scope, ?bool $supports_pkce, ?bool $trust_self_signed_certificate = null) : static

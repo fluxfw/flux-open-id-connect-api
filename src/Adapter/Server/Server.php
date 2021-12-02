@@ -12,8 +12,8 @@ use Swoole\Http\Server as SwooleServer;
 class Server
 {
 
-    private Config $config;
-    private SwooleHandler $handler;
+    private readonly Config $config;
+    private readonly SwooleHandler $handler;
 
 
     public static function new(?Config $config = null) : static

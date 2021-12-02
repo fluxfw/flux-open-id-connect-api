@@ -7,12 +7,12 @@ use JsonSerializable;
 class UserInfosDto implements JsonSerializable
 {
 
-    private ?string $email;
-    private ?string $name;
-    private ?string $nickname;
-    private ?string $picture;
-    private ?string $profile;
-    private ?string $sub;
+    private readonly ?string $email;
+    private readonly ?string $name;
+    private readonly ?string $nickname;
+    private readonly ?string $picture;
+    private readonly ?string $profile;
+    private readonly ?string $sub;
 
 
     public static function new(?string $sub, ?string $name, ?string $nickname, ?string $profile, ?string $picture, ?string $email) : static

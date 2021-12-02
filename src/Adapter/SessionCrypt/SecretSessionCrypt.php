@@ -11,7 +11,7 @@ class SecretSessionCrypt implements SessionCrypt
     use JsonSessionCrypt;
 
     private const SEPARATOR = "::";
-    private SessionCryptConfigDto $config;
+    private readonly SessionCryptConfigDto $config;
 
 
     public static function new(SessionCryptConfigDto $config) : static

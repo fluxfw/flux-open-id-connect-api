@@ -5,8 +5,8 @@ namespace FluxOpenIdConnectApi\Adapter\Config;
 class SessionCryptConfigDto
 {
 
-    private string $method;
-    private string $secret;
+    private readonly string $method;
+    private readonly string $secret;
 
 
     public static function new(string $secret, ?string $method = null) : static

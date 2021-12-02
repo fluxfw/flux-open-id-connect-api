@@ -5,17 +5,19 @@ namespace FluxOpenIdConnectApi\Adapter\Config;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SecretSessionCrypt;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxRestApi\Cookie\Priority\DefaultCookiePriority;
+use FluxRestApi\Cookie\SameSite\DefaultCookieSameSite;
 
 class EnvConfig implements Config
 {
 
-    private static ?self $instance = null;
-    private ?CookieConfigDto $cookie_config = null;
-    private ?ProviderConfigDto $provider_config = null;
-    private ?RouteConfigDto $route_config = null;
-    private ?ServerConfigDto $server_config = null;
-    private ?SessionCrypt $session_crypt = null;
-    private ?SessionCryptConfigDto $session_crypt_config = null;
+    private static self $instance;
+    private readonly CookieConfigDto $cookie_config;
+    private readonly ProviderConfigDto $provider_config;
+    private readonly RouteConfigDto $route_config;
+    private readonly ServerConfigDto $server_config;
+    private readonly SessionCrypt $session_crypt;
+    private readonly SessionCryptConfigDto $session_crypt_config;
 
 
     public static function new() : static
@@ -35,8 +37,8 @@ class EnvConfig implements Config
             $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_DOMAIN"] ?? null,
             ($secure = $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_SECURE"] ?? null) !== null ? in_array($secure, ["true", "1"]) : null,
             ($http_only = $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_HTTP_ONLY"] ?? null) !== null ? in_array($http_only, ["true", "1"]) : null,
-            $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_SAME_SITE"] ?? null,
-            $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_PRIORITY"] ?? null
+            ($same_site = $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_SAME_SITE"] ?? null) !== null ? DefaultCookieSameSite::from($same_site) : null,
+            ($priority = $_ENV["FLUX_OPEN_ID_CONNECT_API_COOKIE_PRIORITY"] ?? null) !== null ? DefaultCookiePriority::from($priority) : null
         );
 
         return $this->cookie_config;

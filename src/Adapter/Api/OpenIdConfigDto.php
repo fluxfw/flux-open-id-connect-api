@@ -7,10 +7,10 @@ use FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
 class OpenIdConfigDto
 {
 
-    private ?string $authorization_endpoint;
-    private ProviderConfigDto $provider_config;
-    private ?string $token_endpoint;
-    private ?string $user_info_endpoint;
+    private readonly ?string $authorization_endpoint;
+    private readonly ProviderConfigDto $provider_config;
+    private readonly ?string $token_endpoint;
+    private readonly ?string $user_info_endpoint;
 
 
     public static function new(ProviderConfigDto $provider_config, ?string $authorization_endpoint = null, ?string $token_endpoint = null, ?string $user_info_endpoint = null) : static

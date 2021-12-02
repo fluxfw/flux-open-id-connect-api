@@ -9,20 +9,22 @@ use FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
 use FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
 
 PhpVersionChecker::new(
-    ">=8.0",
-    __NAMESPACE__
+    ">=8.1"
 )
-    ->check();
+    ->checkAndDie(
+        __NAMESPACE__
+    );
 PhpExtChecker::new(
     [
         "curl",
         "json",
         "openssl",
         "swoole"
-    ],
-    __NAMESPACE__
+    ]
 )
-    ->check();
+    ->checkAndDie(
+        __NAMESPACE__
+    );
 
 Psr4Autoload::new(
     [

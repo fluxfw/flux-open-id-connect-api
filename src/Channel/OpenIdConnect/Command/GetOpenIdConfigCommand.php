@@ -9,7 +9,7 @@ use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 class GetOpenIdConfigCommand
 {
 
-    private RequestService $request;
+    private readonly RequestService $request;
 
 
     public static function new(RequestService $request) : static
