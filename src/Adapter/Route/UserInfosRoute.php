@@ -9,14 +9,15 @@ use FluxRestApi\Body\TextBodyDto;
 use FluxRestApi\Request\RequestDto;
 use FluxRestApi\Response\ResponseDto;
 use FluxRestApi\Route\Route;
+use FluxRestBaseApi\Method\DefaultMethod;
 use FluxRestBaseApi\Method\Method;
-use FluxRestBaseApi\Status\Status;
+use FluxRestBaseApi\Status\DefaultStatus;
 
 class UserInfosRoute implements Route
 {
 
-    private Api $api;
-    private CookieConfigDto $cookie_config;
+    private readonly Api $api;
+    private readonly CookieConfigDto $cookie_config;
 
 
     public static function new(Api $api, CookieConfigDto $cookie_config) : static
@@ -42,9 +43,9 @@ class UserInfosRoute implements Route
     }
 
 
-    public function getMethod() : string
+    public function getMethod() : Method
     {
-        return Method::GET;
+        return DefaultMethod::GET;
     }
 
 
@@ -73,7 +74,7 @@ class UserInfosRoute implements Route
                 TextBodyDto::new(
                     "Authorization needed"
                 ),
-                Status::_401
+                DefaultStatus::_401
             );
         }
     }

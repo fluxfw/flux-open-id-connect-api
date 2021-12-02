@@ -7,7 +7,7 @@ use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 class LogoutCommand
 {
 
-    private RouteConfigDto $route_config;
+    private readonly RouteConfigDto $route_config;
 
 
     public static function new(RouteConfigDto $route_config) : static

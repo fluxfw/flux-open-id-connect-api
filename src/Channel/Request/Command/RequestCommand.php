@@ -3,8 +3,8 @@
 namespace FluxOpenIdConnectApi\Channel\Request\Command;
 
 use Exception;
-use FluxRestBaseApi\Body\BodyType;
-use FluxRestBaseApi\Header\Header;
+use FluxRestBaseApi\Body\DefaultBodyType;
+use FluxRestBaseApi\Header\DefaultHeader;
 
 class RequestCommand
 {
@@ -24,16 +24,16 @@ class RequestCommand
             $curl = curl_init($url);
 
             $headers = [
-                Header::ACCEPT     => BodyType::JSON,
-                Header::USER_AGENT => "FluxOpenIdConnectApi"
+                DefaultHeader::ACCEPT->value     => DefaultBodyType::JSON->value,
+                DefaultHeader::USER_AGENT->value => "FluxOpenIdConnectApi"
             ];
 
             if (!empty($authorization)) {
-                $headers[Header::AUTHORIZATION] = $authorization;
+                $headers[DefaultHeader::AUTHORIZATION->value] = $authorization;
             }
 
             if (!empty($post_data)) {
-                $headers[Header::CONTENT_TYPE] = BodyType::JSON;
+                $headers[DefaultHeader::CONTENT_TYPE->value] = DefaultBodyType::JSON->value;
 
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($post_data, JSON_UNESCAPED_SLASHES));
             }

@@ -10,9 +10,9 @@ use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 class Api
 {
 
-    private Config $config;
-    private ?OpenIdConfigDto $open_id_config = null;
-    private ?RequestService $request = null;
+    private readonly Config $config;
+    private readonly OpenIdConfigDto $open_id_config;
+    private readonly RequestService $request;
 
 
     public static function new(?Config $config = null) : static

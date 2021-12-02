@@ -5,8 +5,8 @@ namespace FluxOpenIdConnectApi\Adapter\Config;
 class RouteConfigDto
 {
 
-    private string $after_login_url;
-    private string $after_logout_url;
+    private readonly string $after_login_url;
+    private readonly string $after_logout_url;
 
 
     public static function new(?string $after_login_url = null, ?string $after_logout_url = null) : static

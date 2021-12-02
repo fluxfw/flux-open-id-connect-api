@@ -2,23 +2,22 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Config;
 
+use FluxRestApi\Cookie\Priority\CookiePriority;
+use FluxRestApi\Cookie\Priority\DefaultCookiePriority;
+use FluxRestApi\Cookie\SameSite\CookieSameSite;
+use FluxRestApi\Cookie\SameSite\DefaultCookieSameSite;
+
 class CookieConfigDto
 {
 
-    const PRIORITY_HIGH = "High";
-    const PRIORITY_LOW = "Low";
-    const PRIORITY_MEDIUM = "Medium";
-    const SAME_SITE_LAX = "Lax";
-    const SAME_SITE_NONE = "None";
-    const SAME_SITE_STRICT = "Strict";
-    private ?string $domain;
-    private ?int $expires_in;
-    private bool $http_only;
-    private string $name;
-    private string $path;
-    private string $priority;
-    private string $same_site;
-    private bool $secure;
+    private readonly string $domain;
+    private readonly ?int $expires_in;
+    private readonly bool $http_only;
+    private readonly string $name;
+    private readonly string $path;
+    private readonly CookiePriority $priority;
+    private readonly CookieSameSite $same_site;
+    private readonly bool $secure;
 
 
     public static function new(
@@ -28,25 +27,25 @@ class CookieConfigDto
         ?string $domain = null,
         ?bool $secure = null,
         ?bool $http_only = null,
-        ?string $same_site = null,
-        ?string $priority = null
+        ?CookieSameSite $same_site = null,
+        ?CookiePriority $priority = null
     ) : static {
         $dto = new static();
 
         $dto->name = $name ?? "auth";
         $dto->expires_in = $expires_in;
         $dto->path = $path ?? "/";
-        $dto->domain = $domain;
+        $dto->domain = $domain ?? "";
         $dto->secure = $secure ?? true;
         $dto->http_only = $http_only ?? true;
-        $dto->same_site = $same_site ?? static::SAME_SITE_LAX;
-        $dto->priority = $priority ?? static::PRIORITY_MEDIUM;
+        $dto->same_site = $same_site ?? DefaultCookieSameSite::LAX;
+        $dto->priority = $priority ?? DefaultCookiePriority::MEDIUM;
 
         return $dto;
     }
 
 
-    public function getDomain() : ?string
+    public function getDomain() : string
     {
         return $this->domain;
     }
@@ -70,13 +69,13 @@ class CookieConfigDto
     }
 
 
-    public function getPriority() : string
+    public function getPriority() : CookiePriority
     {
         return $this->priority;
     }
 
 
-    public function getSameSite() : string
+    public function getSameSite() : CookieSameSite
     {
         return $this->same_site;
     }

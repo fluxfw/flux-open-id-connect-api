@@ -12,10 +12,10 @@ use Throwable;
 class CallbackCommand
 {
 
-    private OpenIdConfigDto $open_id_config;
-    private RequestService $request;
-    private RouteConfigDto $route_config;
-    private SessionCrypt $session_crypt;
+    private readonly OpenIdConfigDto $open_id_config;
+    private readonly RequestService $request;
+    private readonly RouteConfigDto $route_config;
+    private readonly SessionCrypt $session_crypt;
 
 
     public static function new(OpenIdConfigDto $open_id_config, RouteConfigDto $route_config, SessionCrypt $session_crypt, RequestService $request) : static

@@ -8,15 +8,16 @@ use FluxRestApi\Cookie\CookieDto;
 use FluxRestApi\Request\RequestDto;
 use FluxRestApi\Response\ResponseDto;
 use FluxRestApi\Route\Route;
-use FluxRestBaseApi\Header\Header;
+use FluxRestBaseApi\Header\DefaultHeader;
+use FluxRestBaseApi\Method\DefaultMethod;
 use FluxRestBaseApi\Method\Method;
-use FluxRestBaseApi\Status\Status;
+use FluxRestBaseApi\Status\DefaultStatus;
 
 class LoginRoute implements Route
 {
 
-    private Api $api;
-    private CookieConfigDto $cookie_config;
+    private readonly Api $api;
+    private readonly CookieConfigDto $cookie_config;
 
 
     public static function new(Api $api, CookieConfigDto $cookie_config) : static
@@ -42,9 +43,9 @@ class LoginRoute implements Route
     }
 
 
-    public function getMethod() : string
+    public function getMethod() : Method
     {
-        return Method::GET;
+        return DefaultMethod::GET;
     }
 
 
@@ -60,9 +61,9 @@ class LoginRoute implements Route
 
         return ResponseDto::new(
             null,
-            Status::_302,
+            DefaultStatus::_302,
             [
-                Header::LOCATION => $authorize_url
+                DefaultHeader::LOCATION->value => $authorize_url
             ],
             [
                 CookieDto::new(
