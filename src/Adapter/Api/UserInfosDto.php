@@ -2,9 +2,7 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Api;
 
-use JsonSerializable;
-
-class UserInfosDto implements JsonSerializable
+class UserInfosDto
 {
 
     public readonly ?string $email;
@@ -27,11 +25,5 @@ class UserInfosDto implements JsonSerializable
         $dto->email = $email;
 
         return $dto;
-    }
-
-
-    public function jsonSerialize() : array
-    {
-        return get_object_vars($this);
     }
 }
