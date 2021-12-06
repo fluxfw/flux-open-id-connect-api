@@ -25,25 +25,25 @@ class GetOpenIdConfigCommand
     public function getOpenIdConfig(ProviderConfigDto $provider_config) : OpenIdConfigDto
     {
         $config = $this->request->request(
-            $provider_config->getUrl() . "/.well-known/openid-configuration",
+            $provider_config->url . "/.well-known/openid-configuration",
             null,
             null,
-            $provider_config->isTrustSelfSignedCertificate()
+            $provider_config->trust_self_signed_certificate
         );
 
         return OpenIdConfigDto::new(
             $provider_config,
             $this->mapToProviderUrlProtocol(
                 $config["authorization_endpoint"] ?? null,
-                $provider_config->getUrl()
+                $provider_config->url
             ),
             $this->mapToProviderUrlProtocol(
                 $config["token_endpoint"] ?? null,
-                $provider_config->getUrl()
+                $provider_config->url
             ),
             $this->mapToProviderUrlProtocol(
                 $config["userinfo_endpoint"] ?? null,
-                $provider_config->getUrl()
+                $provider_config->url
             )
         );
     }

@@ -65,11 +65,11 @@ class LogoutRoute implements Route
             ],
             [
                 CookieDto::new(
-                    $this->cookie_config->getName(),
+                    $this->cookie_config->name,
                     null,
                     null,
-                    $this->cookie_config->getPath(),
-                    $this->cookie_config->getDomain()
+                    $this->cookie_config->path,
+                    $this->cookie_config->domain
                 )
             ]
         );

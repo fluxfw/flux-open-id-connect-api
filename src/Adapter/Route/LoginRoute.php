@@ -67,15 +67,15 @@ class LoginRoute implements Route
             ],
             [
                 CookieDto::new(
-                    $this->cookie_config->getName(),
+                    $this->cookie_config->name,
                     $encrypted_session,
-                    $this->cookie_config->getExpiresIn(),
-                    $this->cookie_config->getPath(),
-                    $this->cookie_config->getDomain(),
-                    $this->cookie_config->isSecure(),
-                    $this->cookie_config->isHttpOnly(),
-                    $this->cookie_config->getSameSite(),
-                    $this->cookie_config->getPriority()
+                    $this->cookie_config->expires_in,
+                    $this->cookie_config->path,
+                    $this->cookie_config->domain,
+                    $this->cookie_config->secure,
+                    $this->cookie_config->http_only,
+                    $this->cookie_config->same_site,
+                    $this->cookie_config->priority
                 )
             ]
         );

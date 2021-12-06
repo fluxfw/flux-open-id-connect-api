@@ -56,7 +56,7 @@ class OpenIdConnectService
             $this->request
         )
             ->getOpenIdConfig(
-                $this->open_id_config->getProviderConfig()
+                $this->open_id_config->provider_config
             );
     }
 

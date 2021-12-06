@@ -10,14 +10,14 @@ use FluxRestApi\Cookie\SameSite\DefaultCookieSameSite;
 class CookieConfigDto
 {
 
-    private readonly string $domain;
-    private readonly ?int $expires_in;
-    private readonly bool $http_only;
-    private readonly string $name;
-    private readonly string $path;
-    private readonly CookiePriority $priority;
-    private readonly CookieSameSite $same_site;
-    private readonly bool $secure;
+    public readonly string $domain;
+    public readonly ?int $expires_in;
+    public readonly bool $http_only;
+    public readonly string $name;
+    public readonly string $path;
+    public readonly CookiePriority $priority;
+    public readonly CookieSameSite $same_site;
+    public readonly bool $secure;
 
 
     public static function new(
@@ -42,53 +42,5 @@ class CookieConfigDto
         $dto->priority = $priority ?? DefaultCookiePriority::MEDIUM;
 
         return $dto;
-    }
-
-
-    public function getDomain() : string
-    {
-        return $this->domain;
-    }
-
-
-    public function getExpiresIn() : ?int
-    {
-        return $this->expires_in;
-    }
-
-
-    public function getName() : string
-    {
-        return $this->name;
-    }
-
-
-    public function getPath() : string
-    {
-        return $this->path;
-    }
-
-
-    public function getPriority() : CookiePriority
-    {
-        return $this->priority;
-    }
-
-
-    public function getSameSite() : CookieSameSite
-    {
-        return $this->same_site;
-    }
-
-
-    public function isHttpOnly() : bool
-    {
-        return $this->http_only;
-    }
-
-
-    public function isSecure() : bool
-    {
-        return $this->secure;
     }
 }

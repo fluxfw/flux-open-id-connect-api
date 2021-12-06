@@ -5,10 +5,10 @@ namespace FluxOpenIdConnectApi\Adapter\Config;
 class ServerConfigDto
 {
 
-    private readonly ?string $https_cert;
-    private readonly ?string $https_key;
-    private readonly string $listen;
-    private readonly int $port;
+    public readonly ?string $https_cert;
+    public readonly ?string $https_key;
+    public readonly string $listen;
+    public readonly int $port;
 
 
     public static function new(?string $https_cert = null, ?string $https_key = null, ?string $listen = null, ?int $port = null) : static
@@ -21,29 +21,5 @@ class ServerConfigDto
         $dto->port = $port ?? 9501;
 
         return $dto;
-    }
-
-
-    public function getHttpsCert() : ?string
-    {
-        return $this->https_cert;
-    }
-
-
-    public function getHttpsKey() : ?string
-    {
-        return $this->https_key;
-    }
-
-
-    public function getListen() : string
-    {
-        return $this->listen;
-    }
-
-
-    public function getPort() : int
-    {
-        return $this->port;
     }
 }
