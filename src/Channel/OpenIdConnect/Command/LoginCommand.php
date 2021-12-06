@@ -30,14 +30,14 @@ class LoginCommand
         $session["state"] = $state = hash("sha256", rand() . microtime(true));
 
         $parameters = [
-            "client_id"     => $this->open_id_config->getProviderConfig()->getClientId(),
-            "redirect_uri"  => $this->open_id_config->getProviderConfig()->getRedirectUri(),
+            "client_id"     => $this->open_id_config->provider_config->client_id,
+            "redirect_uri"  => $this->open_id_config->provider_config->redirect_uri,
             "response_type" => "code",
             "state"         => $state,
-            "scope"         => $this->open_id_config->getProviderConfig()->getScope()
+            "scope"         => $this->open_id_config->provider_config->scope
         ];
 
-        if ($this->open_id_config->getProviderConfig()->isSupportsPkce()) {
+        if ($this->open_id_config->provider_config->supports_pkce) {
             $session["code_verifier"] = $code_verifier = bin2hex(random_bytes(64));
 
             $parameters += [
@@ -46,7 +46,7 @@ class LoginCommand
             ];
         }
 
-        $authorize_url = $this->open_id_config->getAuthorizationEndpoint();
+        $authorize_url = $this->open_id_config->authorization_endpoint;
         $authorize_url .= (str_contains($authorize_url, "?") ? "&" : "?")
             . implode("&", array_map(fn(string $key, string $value) => $key . "=" . rawurlencode($value), array_keys($parameters), $parameters));
 

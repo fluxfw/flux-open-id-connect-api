@@ -5,8 +5,8 @@ namespace FluxOpenIdConnectApi\Adapter\Config;
 class RouteConfigDto
 {
 
-    private readonly string $after_login_url;
-    private readonly string $after_logout_url;
+    public readonly string $after_login_url;
+    public readonly string $after_logout_url;
 
 
     public static function new(?string $after_login_url = null, ?string $after_logout_url = null) : static
@@ -17,17 +17,5 @@ class RouteConfigDto
         $dto->after_logout_url = $after_logout_url ?? "/";
 
         return $dto;
-    }
-
-
-    public function getAfterLoginUrl() : string
-    {
-        return $this->after_login_url;
-    }
-
-
-    public function getAfterLogoutUrl() : string
-    {
-        return $this->after_logout_url;
     }
 }

@@ -61,14 +61,14 @@ class CallbackCommand
             }
 
             $data = [
-                "client_id"     => $this->open_id_config->getProviderConfig()->getClientId(),
-                "client_secret" => $this->open_id_config->getProviderConfig()->getClientSecret(),
+                "client_id"     => $this->open_id_config->provider_config->client_id,
+                "client_secret" => $this->open_id_config->provider_config->client_secret,
                 "code"          => $code,
                 "grant_type"    => "authorization_code",
-                "redirect_uri"  => $this->open_id_config->getProviderConfig()->getRedirectUri()
+                "redirect_uri"  => $this->open_id_config->provider_config->redirect_uri
             ];
 
-            if ($this->open_id_config->getProviderConfig()->isSupportsPkce()) {
+            if ($this->open_id_config->provider_config->supports_pkce) {
                 if (empty($code_verifier)) {
                     throw new Exception("Invalid code verifier");
                 }
@@ -76,7 +76,7 @@ class CallbackCommand
                 $data["code_verifier"] = $code_verifier;
             }
 
-            $token_url = $this->open_id_config->getTokenEndpoint();
+            $token_url = $this->open_id_config->token_endpoint;
             $token_url .= (str_contains($token_url, "?") ? "&" : "?")
                 . implode("&", array_map(fn(string $key, string $value) : string => $key . "=" . rawurlencode($value), array_keys($data), $data));
 
@@ -84,7 +84,7 @@ class CallbackCommand
                 $token_url,
                 null,
                 $data,
-                $this->open_id_config->getProviderConfig()->isTrustSelfSignedCertificate()
+                $this->open_id_config->provider_config->trust_self_signed_certificate
             );
 
             if (empty($token_type = $token["token_type"]) || empty($access_token = $token["access_token"])) {
@@ -93,7 +93,7 @@ class CallbackCommand
 
             $session["authorization"] = $token_type . " " . $access_token;
 
-            $redirect_url = $this->route_config->getAfterLoginUrl();
+            $redirect_url = $this->route_config->after_login_url;
         } catch (Throwable $ex) {
             echo "Callback error: " . $ex . "\n";
 

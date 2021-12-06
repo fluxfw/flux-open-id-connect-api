@@ -59,7 +59,7 @@ class UserInfosRoute implements Route
     {
         $user_infos = $this->api->getUserInfos(
             $request->getCookie(
-                $this->cookie_config->getName()
+                $this->cookie_config->name
             )
         );
 

@@ -40,10 +40,10 @@ class GetUserInfosCommand
 
             if (!empty($authorization)) {
                 $user_infos = $this->request->request(
-                    $this->open_id_config->getUserInfoEndpoint(),
+                    $this->open_id_config->user_info_endpoint,
                     $authorization,
                     null,
-                    $this->open_id_config->getProviderConfig()->isTrustSelfSignedCertificate()
+                    $this->open_id_config->provider_config->trust_self_signed_certificate
                 );
 
                 if (!empty($user_infos)) {

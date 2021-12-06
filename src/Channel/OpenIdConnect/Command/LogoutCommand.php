@@ -22,6 +22,6 @@ class LogoutCommand
 
     public function logout() : string
     {
-        return $this->route_config->getAfterLogoutUrl();
+        return $this->route_config->after_logout_url;
     }
 }
