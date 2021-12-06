@@ -1,7 +1,9 @@
+ARG FLUX_AUTOLOAD_API_IMAGE=docker-registry.fluxpublisher.ch/flux-autoload/api:latest
 ARG FLUX_REST_API_IMAGE=docker-registry.fluxpublisher.ch/flux-rest/api:latest
 ARG PHP_CLI_IMAGE=php:cli-alpine
 ARG SWOOLE_SOURCE_URL=https://github.com/swoole/swoole-src/archive/master.tar.gz
 
+FROM $FLUX_AUTOLOAD_API_IMAGE AS flux_autoload_api
 FROM $FLUX_REST_API_IMAGE AS flux_rest_api
 
 FROM $PHP_CLI_IMAGE
@@ -18,6 +20,7 @@ RUN apk add --no-cache libstdc++ && \
     docker-php-source delete && \
     apk del .build-deps
 
+COPY --from=flux_autoload_api /flux-autoload-api /flux-open-id-connect-api/libs/flux-autoload-api
 COPY --from=flux_rest_api /flux-rest-api /flux-open-id-connect-api/libs/flux-rest-api
 COPY . /flux-open-id-connect-api
 
