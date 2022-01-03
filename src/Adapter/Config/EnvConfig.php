@@ -49,8 +49,10 @@ class EnvConfig implements Config
     {
         $this->provider_config ??= ProviderConfigDto::new(
             $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_URL"],
-            $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_ID"],
-            $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_SECRET"],
+            ($_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_ID"] ?? null) ??
+            ($id_file = $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_ID_FILE"] ?? null) !== null && file_exists($id_file) ? (file_get_contents($id_file) ?: "") : null,
+            ($_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_SECRET"] ?? null) ??
+            ($secret_file = $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_SECRET_FILE"] ?? null) !== null && file_exists($secret_file) ? (file_get_contents($secret_file) ?: "") : null,
             $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_REDIRECT_URI"],
             $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_SCOPE"] ?? null,
             ($supports_proof_key_for_code_exchange = $_ENV["FLUX_OPEN_ID_CONNECT_API_PROVIDER_SUPPORTS_PKCE"] ?? null) !== null ? in_array($supports_proof_key_for_code_exchange, ["true", "1"]) : null,
@@ -103,7 +105,8 @@ class EnvConfig implements Config
     public function getSessionCryptConfig() : SessionCryptConfigDto
     {
         $this->session_crypt_config ??= SessionCryptConfigDto::new(
-            $_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET"],
+            ($_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET"] ?? null) ??
+            ($secret_file = $_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET_FILE"] ?? null) !== null && file_exists($secret_file) ? (file_get_contents($secret_file) ?: "") : null,
             $_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_METHOD"] ?? null
         );
 
