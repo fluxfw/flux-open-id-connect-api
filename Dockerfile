@@ -26,4 +26,6 @@ COPY . /flux-open-id-connect-api
 
 ENTRYPOINT ["/flux-open-id-connect-api/bin/entrypoint.php"]
 
+USER www-data:www-data
+
 EXPOSE 9501
