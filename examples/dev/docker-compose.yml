@@ -23,6 +23,6 @@ services:
       [- FLUX_OPEN_ID_CONNECT_API_PORT=9501]
 secrets:
   open_id_connect_provider_client_id:
-    file: ./data/open_id_connect_provider_client_id
+    file: ./data/secrets/open_id_connect_provider_client_id
   open_id_connect_provider_client_secret:
-    file: ./data/open_id_connect_provider_client_secret
+    file: ./data/secrets/open_id_connect_provider_client_secret
