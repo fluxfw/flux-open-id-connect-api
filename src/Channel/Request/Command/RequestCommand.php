@@ -47,7 +47,13 @@ class RequestCommand
                 curl_setopt($curl, CURLOPT_PROXY_SSL_VERIFYHOST, false);
             }
 
+            curl_setopt($curl, CURLOPT_FAILONERROR, true);
+
             $response = curl_exec($curl);
+
+            if (curl_errno($curl) !== 0) {
+                throw new Exception(curl_error($curl));
+            }
 
             if (empty($response) || empty($response = json_decode($response, true))) {
                 throw new Exception("Invalid response");
