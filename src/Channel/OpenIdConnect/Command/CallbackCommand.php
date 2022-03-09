@@ -3,7 +3,7 @@
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Exception;
-use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
@@ -12,22 +12,28 @@ use Throwable;
 class CallbackCommand
 {
 
-    private readonly OpenIdConfigDto $open_id_config;
-    private readonly RequestService $request;
-    private readonly RouteConfigDto $route_config;
-    private readonly SessionCrypt $session_crypt;
+    private function __construct(
+        private readonly OpenIdConfigDto $open_id_config,
+        private readonly RouteConfigDto $route_config,
+        private readonly SessionCrypt $session_crypt,
+        private readonly RequestService $request_service
+    ) {
+
+    }
 
 
-    public static function new(OpenIdConfigDto $open_id_config, RouteConfigDto $route_config, SessionCrypt $session_crypt, RequestService $request) : static
-    {
-        $command = new static();
-
-        $command->open_id_config = $open_id_config;
-        $command->route_config = $route_config;
-        $command->session_crypt = $session_crypt;
-        $command->request = $request;
-
-        return $command;
+    public static function new(
+        OpenIdConfigDto $open_id_config,
+        RouteConfigDto $route_config,
+        SessionCrypt $session_crypt,
+        RequestService $request_service
+    ) : static {
+        return new static(
+            $open_id_config,
+            $route_config,
+            $session_crypt,
+            $request_service
+        );
     }
 
 
@@ -80,7 +86,7 @@ class CallbackCommand
             $token_url .= (str_contains($token_url, "?") ? "&" : "?")
                 . implode("&", array_map(fn(string $key, string $value) : string => $key . "=" . rawurlencode($value), array_keys($data), $data));
 
-            $token = $this->request->request(
+            $token = $this->request_service->request(
                 $token_url,
                 null,
                 $data,

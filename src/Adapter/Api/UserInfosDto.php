@@ -5,25 +5,33 @@ namespace FluxOpenIdConnectApi\Adapter\Api;
 class UserInfosDto
 {
 
-    public readonly ?string $email;
-    public readonly ?string $name;
-    public readonly ?string $nickname;
-    public readonly ?string $picture;
-    public readonly ?string $profile;
-    public readonly ?string $sub;
+    private function __construct(
+        public readonly ?string $sub,
+        public readonly ?string $name,
+        public readonly ?string $nickname,
+        public readonly ?string $profile,
+        public readonly ?string $picture,
+        public readonly ?string $email
+    ) {
+
+    }
 
 
-    public static function new(?string $sub, ?string $name, ?string $nickname, ?string $profile, ?string $picture, ?string $email) : static
-    {
-        $dto = new static();
-
-        $dto->sub = $sub;
-        $dto->name = $name;
-        $dto->nickname = $nickname;
-        $dto->profile = $profile;
-        $dto->picture = $picture;
-        $dto->email = $email;
-
-        return $dto;
+    public static function new(
+        ?string $sub,
+        ?string $name,
+        ?string $nickname,
+        ?string $profile,
+        ?string $picture,
+        ?string $email
+    ) : static {
+        return new static(
+            $sub,
+            $name,
+            $nickname,
+            $profile,
+            $picture,
+            $email
+        );
     }
 }

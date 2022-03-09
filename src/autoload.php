@@ -3,11 +3,11 @@
 namespace FluxOpenIdConnectApi;
 
 require_once __DIR__ . "/../libs/flux-autoload-api/autoload.php";
-require_once __DIR__ . "/../libs/flux-rest-api/autoload.php";
+require_once __DIR__ . "/../libs/flux-rest-base-api/autoload.php";
 
-use FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
-use FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
-use FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
+use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
+use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
+use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
 
 PhpVersionChecker::new(
     ">=8.1"
@@ -19,8 +19,7 @@ PhpExtChecker::new(
     [
         "curl",
         "json",
-        "openssl",
-        "swoole"
+        "openssl"
     ]
 )
     ->checkAndDie(

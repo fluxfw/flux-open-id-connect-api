@@ -11,16 +11,21 @@ class SecretSessionCrypt implements SessionCrypt
     use JsonSessionCrypt;
 
     private const SEPARATOR = "::";
-    private readonly SessionCryptConfigDto $config;
 
 
-    public static function new(SessionCryptConfigDto $config) : static
-    {
-        $session_crypt = new static();
+    private function __construct(
+        private readonly SessionCryptConfigDto $session_crypt_config
+    ) {
 
-        $session_crypt->config = $config;
+    }
 
-        return $session_crypt;
+
+    public static function new(
+        SessionCryptConfigDto $session_crypt_config
+    ) : static {
+        return new static(
+            $session_crypt_config
+        );
     }
 
 
@@ -38,7 +43,7 @@ class SecretSessionCrypt implements SessionCrypt
             throw new Exception("Invalid encrypted session");
         }
 
-        $session = openssl_decrypt(json_encode($value, JSON_UNESCAPED_SLASHES), $this->config->method, hash("sha256", $this->config->secret), 0, $iv);
+        $session = openssl_decrypt(json_encode($value, JSON_UNESCAPED_SLASHES), $this->session_crypt_config->method, hash("sha256", $this->session_crypt_config->secret), 0, $iv);
 
         if (empty($session)) {
             throw new Exception("OpenSSL error: " . openssl_error_string());
@@ -50,9 +55,9 @@ class SecretSessionCrypt implements SessionCrypt
 
     public function encrypt(string $session) : string
     {
-        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->config->method));
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->session_crypt_config->method));
 
-        $value = openssl_encrypt($session, $this->config->method, hash("sha256", $this->config->secret), 0, $iv);
+        $value = openssl_encrypt($session, $this->session_crypt_config->method, hash("sha256", $this->session_crypt_config->secret), 0, $iv);
 
         if (empty($value)) {
             throw new Exception("OpenSSL error: " . openssl_error_string());

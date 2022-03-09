@@ -2,29 +2,32 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 
 class GetOpenIdConfigCommand
 {
 
-    private readonly RequestService $request;
+    private function __construct(
+        private readonly RequestService $request_service
+    ) {
+
+    }
 
 
-    public static function new(RequestService $request) : static
-    {
-        $command = new static();
-
-        $command->request = $request;
-
-        return $command;
+    public static function new(
+        RequestService $request_service
+    ) : static {
+        return new static(
+            $request_service
+        );
     }
 
 
     public function getOpenIdConfig(ProviderConfigDto $provider_config) : OpenIdConfigDto
     {
-        $config = $this->request->request(
+        $config = $this->request_service->request(
             $provider_config->url . "/.well-known/openid-configuration",
             null,
             null,

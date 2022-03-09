@@ -2,8 +2,8 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
+use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use Throwable;
@@ -11,20 +11,25 @@ use Throwable;
 class GetUserInfosCommand
 {
 
-    private readonly OpenIdConfigDto $open_id_config;
-    private readonly RequestService $request;
-    private readonly SessionCrypt $session_crypt;
+    private function __construct(
+        private readonly OpenIdConfigDto $open_id_config,
+        private readonly SessionCrypt $session_crypt,
+        private readonly RequestService $request_service
+    ) {
+
+    }
 
 
-    public static function new(OpenIdConfigDto $open_id_config, SessionCrypt $session_crypt, RequestService $request) : static
-    {
-        $command = new static();
-
-        $command->open_id_config = $open_id_config;
-        $command->session_crypt = $session_crypt;
-        $command->request = $request;
-
-        return $command;
+    public static function new(
+        OpenIdConfigDto $open_id_config,
+        SessionCrypt $session_crypt,
+        RequestService $request_service
+    ) : static {
+        return new static(
+            $open_id_config,
+            $session_crypt,
+            $request_service
+        );
     }
 
 
@@ -39,7 +44,7 @@ class GetUserInfosCommand
             $authorization = $session["authorization"] ?? null;
 
             if (!empty($authorization)) {
-                $user_infos = $this->request->request(
+                $user_infos = $this->request_service->request(
                     $this->open_id_config->user_info_endpoint,
                     $authorization,
                     null,

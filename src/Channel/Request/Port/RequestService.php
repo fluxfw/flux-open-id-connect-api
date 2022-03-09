@@ -7,11 +7,15 @@ use FluxOpenIdConnectApi\Channel\Request\Command\RequestCommand;
 class RequestService
 {
 
+    private function __construct()
+    {
+
+    }
+
+
     public static function new() : static
     {
-        $service = new static();
-
-        return $service;
+        return new static();
     }
 
 

@@ -7,11 +7,15 @@ class PlainSessionCrypt implements SessionCrypt
 
     use JsonSessionCrypt;
 
+    private function __construct()
+    {
+
+    }
+
+
     public static function new() : static
     {
-        $session_crypt = new static();
-
-        return $session_crypt;
+        return new static();
     }
 
 
