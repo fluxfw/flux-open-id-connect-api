@@ -2,8 +2,8 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Port;
 
-use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
+use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\CallbackCommand;
@@ -16,22 +16,28 @@ use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 class OpenIdConnectService
 {
 
-    private readonly OpenIdConfigDto $open_id_config;
-    private readonly RequestService $request;
-    private readonly RouteConfigDto $route_config;
-    private readonly SessionCrypt $session_crypt;
+    private function __construct(
+        private readonly OpenIdConfigDto $open_id_config,
+        private readonly RouteConfigDto $route_config,
+        private readonly SessionCrypt $session_crypt,
+        private readonly RequestService $request_service
+    ) {
+
+    }
 
 
-    public static function new(OpenIdConfigDto $open_id_config, RouteConfigDto $route_config, SessionCrypt $session_crypt, RequestService $request) : static
-    {
-        $service = new static();
-
-        $service->open_id_config = $open_id_config;
-        $service->route_config = $route_config;
-        $service->session_crypt = $session_crypt;
-        $service->request = $request;
-
-        return $service;
+    public static function new(
+        OpenIdConfigDto $open_id_config,
+        RouteConfigDto $route_config,
+        SessionCrypt $session_crypt,
+        RequestService $request_service
+    ) : static {
+        return new static(
+            $open_id_config,
+            $route_config,
+            $session_crypt,
+            $request_service
+        );
     }
 
 
@@ -41,7 +47,7 @@ class OpenIdConnectService
             $this->open_id_config,
             $this->route_config,
             $this->session_crypt,
-            $this->request
+            $this->request_service
         )
             ->callback(
                 $encrypted_session,
@@ -53,7 +59,7 @@ class OpenIdConnectService
     public function getOpenIdConfig() : OpenIdConfigDto
     {
         return GetOpenIdConfigCommand::new(
-            $this->request
+            $this->request_service
         )
             ->getOpenIdConfig(
                 $this->open_id_config->provider_config
@@ -66,7 +72,7 @@ class OpenIdConnectService
         return GetUserInfosCommand::new(
             $this->open_id_config,
             $this->session_crypt,
-            $this->request
+            $this->request_service
         )
             ->getUserInfos(
                 $encrypted_session

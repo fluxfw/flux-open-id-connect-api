@@ -2,24 +2,28 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use FluxOpenIdConnectApi\Adapter\Api\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 
 class LoginCommand
 {
 
-    private readonly OpenIdConfigDto $open_id_config;
-    private readonly SessionCrypt $session_crypt;
+    private function __construct(
+        private readonly OpenIdConfigDto $open_id_config,
+        private readonly SessionCrypt $session_crypt
+    ) {
+
+    }
 
 
-    public static function new(OpenIdConfigDto $open_id_config, SessionCrypt $session_crypt) : static
-    {
-        $command = new static();
-
-        $command->open_id_config = $open_id_config;
-        $command->session_crypt = $session_crypt;
-
-        return $command;
+    public static function new(
+        OpenIdConfigDto $open_id_config,
+        SessionCrypt $session_crypt
+    ) : static {
+        return new static(
+            $open_id_config,
+            $session_crypt
+        );
     }
 
 

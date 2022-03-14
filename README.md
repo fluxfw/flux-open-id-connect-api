@@ -1,13 +1,27 @@
 # flux-open-id-connect-api
 
+Open Id Connect Api
+
+## Installation
+
+```dockerfile
+COPY --from=docker-registry.fluxpublisher.ch/flux-open-id-connect/api:latest /flux-open-id-connect-api /%path%/libs/flux-open-id-connect-api
+```
+
+## Usage
+
+```php
+require_once __DIR__ . "/%path%/libs/flux-open-id-connect-api/autoload.php";
+```
+
+```php
+OpenIdConnectApi::new();
+```
+
 ## Environment variables
 
 | Variable | Description | Default value |
 | -------- | ----------- | ------------- |
-| FLUX_OPEN_ID_CONNECT_API_SERVER_HTTPS_CERT | Path to HTTPS certificate file<br>Set this will enable listen on HTTPS<br>Should be on a volume | - |
-| FLUX_OPEN_ID_CONNECT_API_SERVER_HTTPS_KEY | Path to HTTPS key file<br>Should be on a volume | - |
-| FLUX_OPEN_ID_CONNECT_API_SERVER_LISTEN | Listen IP | 0.0.0.0 |
-| FLUX_OPEN_ID_CONNECT_API_SERVER_PORT | Listen port | 9501 |
 | **FLUX_OPEN_ID_CONNECT_API_PROVIDER_URl** | OpenIdConnect server url | - |
 | **FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_ID** | OpenIdConnect client id<br>Use *FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_ID_FILE* for docker secrets | - |
 | **FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_SECRET** | OpenIdConnect client secret<br>Use *FLUX_OPEN_ID_CONNECT_API_PROVIDER_CLIENT_SECRET_FILE* for docker secrets | - |
@@ -20,17 +34,9 @@
 | FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_PLAIN | Bypass encrypt cookie for dev environment | false |
 | FLUX_OPEN_ID_CONNECT_API_ROUTE_AFTER_LOGIN_URL | Url to redirect after login | / |
 | FLUX_OPEN_ID_CONNECT_API_ROUTE_AFTER_LOGOUT_URL | Url to redirect after logout | / |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_NAME | Cookie name | auth |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_EXPIRES_IN | Cookie expires in seconds | (Session end) |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_PATH | Cookie path | / |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_DOMAIN | Cookie domain | - |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_SECURE | Cookie secure | true |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_HTTP_ONLY | Cookie http only | true |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_SAME_SITE | Cookie same site<br>Lax, Strict or None | Lax |
-| FLUX_OPEN_ID_CONNECT_API_COOKIE_PRIORITY | Cookie priority<br>Low, Medium or High | Medium |
 
 Minimal variables required to set are **bold**
 
-## Examples
+## Example
 
-[examples](examples)
+Look at [flux-open-id-connect-rest-api](https://github.com/fluxapps/flux-open-id-connect-rest-api)

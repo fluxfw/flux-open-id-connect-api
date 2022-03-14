@@ -3,17 +3,21 @@
 namespace FluxOpenIdConnectApi\Channel\Request\Command;
 
 use Exception;
-use FluxRestBaseApi\Body\DefaultBodyType;
-use FluxRestBaseApi\Header\DefaultHeader;
+use FluxOpenIdConnectApi\Libs\FluxRestBaseApi\Body\DefaultBodyType;
+use FluxOpenIdConnectApi\Libs\FluxRestBaseApi\Header\DefaultHeader;
 
 class RequestCommand
 {
 
+    private function __construct()
+    {
+
+    }
+
+
     public static function new() : static
     {
-        $command = new static();
-
-        return $command;
+        return new static();
     }
 
 

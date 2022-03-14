@@ -1,23 +1,20 @@
 {
-  "description": "Open Id Connect",
-  "topics": [
-    "alpine",
-    "api",
-    "auth",
-    "authentication",
-    "authorization",
-    "connect",
-    "docker",
-    "id",
-    "login",
-    "logout",
-    "open",
-    "openid",
-    "openidconnect",
-    "php",
-    "rest",
-    "swoole",
-    "user"
-  ],
-  "homepage": "https://github.com/fluxapps/flux-open-id-connect-api"
+    "description": "Open Id Connect Api",
+    "topics": [
+        "api",
+        "auth",
+        "authentication",
+        "authorization",
+        "connect",
+        "id",
+        "library",
+        "login",
+        "logout",
+        "open",
+        "openid",
+        "openidconnect",
+        "php",
+        "user"
+    ],
+    "homepage": "https://github.com/fluxapps/flux-open-id-connect-api"
 }
