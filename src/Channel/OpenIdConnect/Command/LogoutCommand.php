@@ -2,7 +2,7 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
+use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 
 class LogoutCommand
 {

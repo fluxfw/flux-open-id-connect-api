@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Adapter\Config;
+namespace FluxOpenIdConnectApi\Adapter\Provider;
 
 class ProviderConfigDto
 {

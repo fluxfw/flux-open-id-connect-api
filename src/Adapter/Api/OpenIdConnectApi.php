@@ -2,6 +2,7 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Api;
 
+use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 

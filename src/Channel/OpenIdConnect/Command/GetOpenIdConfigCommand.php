@@ -2,8 +2,8 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
-use FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
+use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Provider\ProviderConfigDto;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 
 class GetOpenIdConfigCommand

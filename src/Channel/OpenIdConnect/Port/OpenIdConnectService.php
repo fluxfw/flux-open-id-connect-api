@@ -2,10 +2,10 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Port;
 
-use FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
-use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
-use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
+use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\CallbackCommand;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetOpenIdConfigCommand;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Command\GetUserInfosCommand;

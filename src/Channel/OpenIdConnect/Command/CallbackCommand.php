@@ -3,8 +3,8 @@
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
 use Exception;
-use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
-use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
+use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use Throwable;

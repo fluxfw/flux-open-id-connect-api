@@ -2,13 +2,13 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Api;
 
-use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
-use FluxOpenIdConnectApi\Adapter\Config\ProviderConfigDto;
-use FluxOpenIdConnectApi\Adapter\Config\RouteConfigDto;
-use FluxOpenIdConnectApi\Adapter\Config\SessionCryptConfigDto;
+use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\Provider\ProviderConfigDto;
+use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SecretSessionCrypt;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCryptConfigDto;
 
 class OpenIdConnectApiConfigDto
 {

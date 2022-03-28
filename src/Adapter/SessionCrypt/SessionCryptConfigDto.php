@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Adapter\Config;
+namespace FluxOpenIdConnectApi\Adapter\SessionCrypt;
 
 class SessionCryptConfigDto
 {
