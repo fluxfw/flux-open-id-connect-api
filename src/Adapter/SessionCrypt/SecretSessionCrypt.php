@@ -3,7 +3,6 @@
 namespace FluxOpenIdConnectApi\Adapter\SessionCrypt;
 
 use Exception;
-use FluxOpenIdConnectApi\Adapter\Config\SessionCryptConfigDto;
 
 class SecretSessionCrypt implements SessionCrypt
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Adapter\Api;
+namespace FluxOpenIdConnectApi\Adapter\UserInfo;
 
 class UserInfosDto
 {

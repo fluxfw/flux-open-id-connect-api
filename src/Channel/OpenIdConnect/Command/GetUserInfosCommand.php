@@ -2,9 +2,9 @@
 
 namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
 
-use FluxOpenIdConnectApi\Adapter\Api\UserInfosDto;
-use FluxOpenIdConnectApi\Adapter\Config\OpenIdConfigDto;
+use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
+use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use Throwable;
 

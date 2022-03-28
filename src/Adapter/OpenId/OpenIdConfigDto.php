@@ -1,7 +1,9 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Adapter\Config;
+namespace FluxOpenIdConnectApi\Adapter\OpenId;
 
+use FluxOpenIdConnectApi\Adapter\Provider\ProviderConfigDto;
+use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
