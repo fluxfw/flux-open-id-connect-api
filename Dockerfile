@@ -25,7 +25,7 @@ COPY . /flux-open-id-connect-api
 
 FROM scratch
 
-LABEL org.opencontainers.image.source="https://github.com/fluxapps/flux-open-id-connect-api"
+LABEL org.opencontainers.image.source="https://github.com/flux-eco/flux-open-id-connect-api"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
 
 COPY --from=build /flux-open-id-connect-api /flux-open-id-connect-api
