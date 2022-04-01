@@ -27,6 +27,9 @@ class LoginCommand
     }
 
 
+    /**
+     * @return string[]
+     */
     public function login() : array
     {
         $session = [];
@@ -52,7 +55,7 @@ class LoginCommand
 
         $authorize_url = $this->open_id_config->authorization_endpoint;
         $authorize_url .= (str_contains($authorize_url, "?") ? "&" : "?")
-            . implode("&", array_map(fn(string $key, string $value) => $key . "=" . rawurlencode($value), array_keys($parameters), $parameters));
+            . implode("&", array_map(fn(string $key, string $value) : string => $key . "=" . rawurlencode($value), array_keys($parameters), $parameters));
 
         return [
             $this->session_crypt->encryptAsJson(
