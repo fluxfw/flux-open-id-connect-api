@@ -25,6 +25,11 @@ class OpenIdConnectApi
     }
 
 
+    /**
+     * @param string[] $query_params
+     *
+     * @return string[]
+     */
     public function callback(?string $encrypted_session, array $query_params) : array
     {
         return $this->getOpenIdConnectService()
@@ -44,6 +49,9 @@ class OpenIdConnectApi
     }
 
 
+    /**
+     * @return string[]
+     */
     public function login() : array
     {
         return $this->getOpenIdConnectService()

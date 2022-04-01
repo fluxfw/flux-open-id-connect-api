@@ -37,6 +37,11 @@ class CallbackCommand
     }
 
 
+    /**
+     * @param string[] $query_params
+     *
+     * @return string[]
+     */
     public function callback(?string $encrypted_session, array $query_params) : array
     {
         try {

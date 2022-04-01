@@ -41,6 +41,11 @@ class OpenIdConnectService
     }
 
 
+    /**
+     * @param string[] $query_params
+     *
+     * @return string[]
+     */
     public function callback(?string $encrypted_session, array $query_params) : array
     {
         return CallbackCommand::new(
@@ -80,6 +85,9 @@ class OpenIdConnectService
     }
 
 
+    /**
+     * @return string[]
+     */
     public function login() : array
     {
         return LoginCommand::new(
