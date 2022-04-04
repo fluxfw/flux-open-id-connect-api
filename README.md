@@ -39,4 +39,4 @@ Minimal variables required to set are **bold**
 
 ## Example
 
-Look at [flux-open-id-connect-rest-api](https://github.com/flux-eco/flux-open-id-connect-rest-api)
+Look at [flux-open-id-connect-rest-api](https://github.com/flux-caps/flux-open-id-connect-rest-api)
