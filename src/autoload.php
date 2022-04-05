@@ -3,7 +3,7 @@
 namespace FluxOpenIdConnectApi;
 
 require_once __DIR__ . "/../libs/flux-autoload-api/autoload.php";
-require_once __DIR__ . "/../libs/flux-rest-base-api/autoload.php";
+require_once __DIR__ . "/../libs/flux-rest-api/autoload.php";
 
 use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
 use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpExtChecker;

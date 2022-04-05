@@ -3,8 +3,8 @@
 namespace FluxOpenIdConnectApi\Channel\Request\Command;
 
 use Exception;
-use FluxOpenIdConnectApi\Libs\FluxRestBaseApi\Body\DefaultBodyType;
-use FluxOpenIdConnectApi\Libs\FluxRestBaseApi\Header\DefaultHeader;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Body\DefaultBodyType;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Header\DefaultHeader;
 
 class RequestCommand
 {
