@@ -1,7 +1,7 @@
 ARG ALPINE_IMAGE=alpine:latest
 ARG FLUX_AUTOLOAD_API_IMAGE=docker-registry.fluxpublisher.ch/flux-autoload/api:latest
 ARG FLUX_NAMESPACE_CHANGER_IMAGE=docker-registry.fluxpublisher.ch/flux-namespace-changer:latest
-ARG FLUX_REST_BASE_API_IMAGE=docker-registry.fluxpublisher.ch/flux-rest/base-api:latest
+ARG FLUX_REST_API_IMAGE=docker-registry.fluxpublisher.ch/flux-rest/api:latest
 
 FROM $FLUX_AUTOLOAD_API_IMAGE AS flux_autoload_api
 FROM $FLUX_NAMESPACE_CHANGER_IMAGE AS flux_autoload_api_build
@@ -10,17 +10,17 @@ ENV FLUX_NAMESPACE_CHANGER_TO_NAMESPACE FluxOpenIdConnectApi\\Libs\\FluxAutoload
 COPY --from=flux_autoload_api /flux-autoload-api /code
 RUN $FLUX_NAMESPACE_CHANGER_BIN
 
-FROM $FLUX_REST_BASE_API_IMAGE AS flux_rest_base_api
-FROM $FLUX_NAMESPACE_CHANGER_IMAGE AS flux_rest_base_api_build
-ENV FLUX_NAMESPACE_CHANGER_FROM_NAMESPACE FluxRestBaseApi
-ENV FLUX_NAMESPACE_CHANGER_TO_NAMESPACE FluxOpenIdConnectApi\\Libs\\FluxRestBaseApi
-COPY --from=flux_rest_base_api /flux-rest-base-api /code
+FROM $FLUX_REST_API_IMAGE AS flux_rest_api
+FROM $FLUX_NAMESPACE_CHANGER_IMAGE AS flux_rest_api_build
+ENV FLUX_NAMESPACE_CHANGER_FROM_NAMESPACE FluxRestApi
+ENV FLUX_NAMESPACE_CHANGER_TO_NAMESPACE FluxOpenIdConnectApi\\Libs\\FluxRestApi
+COPY --from=flux_rest_api /flux-rest-api /code
 RUN $FLUX_NAMESPACE_CHANGER_BIN
 
 FROM $ALPINE_IMAGE AS build
 
 COPY --from=flux_autoload_api_build /code /flux-open-id-connect-api/libs/flux-autoload-api
-COPY --from=flux_rest_base_api_build /code /flux-open-id-connect-api/libs/flux-rest-base-api
+COPY --from=flux_rest_api_build /code /flux-open-id-connect-api/libs/flux-rest-api
 COPY . /flux-open-id-connect-api
 
 FROM scratch
