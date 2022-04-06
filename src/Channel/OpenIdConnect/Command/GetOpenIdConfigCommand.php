@@ -31,6 +31,7 @@ class GetOpenIdConfigCommand
             $provider_config->url . "/.well-known/openid-configuration",
             null,
             null,
+            null,
             $provider_config->trust_self_signed_certificate
         );
 

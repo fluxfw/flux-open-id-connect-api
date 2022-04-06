@@ -7,6 +7,7 @@ use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
 
 class OpenIdConfigDto
 {
@@ -45,7 +46,9 @@ class OpenIdConfigDto
             ),
             RouteConfigDto::new(),
             PlainSessionCrypt::new(),
-            RequestService::new()
+            RequestService::new(
+                RestApi::new()
+            )
         )
             ->getOpenIdConfig();
     }

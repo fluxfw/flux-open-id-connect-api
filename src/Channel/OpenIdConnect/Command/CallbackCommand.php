@@ -87,12 +87,9 @@ class CallbackCommand
                 $data["code_verifier"] = $code_verifier;
             }
 
-            $token_url = $this->open_id_config->token_endpoint;
-            $token_url .= (str_contains($token_url, "?") ? "&" : "?")
-                . implode("&", array_map(fn(string $key, string $value) : string => $key . "=" . rawurlencode($value), array_keys($data), $data));
-
             $token = $this->request_service->request(
-                $token_url,
+                $this->open_id_config->token_endpoint,
+                $data,
                 null,
                 $data,
                 $this->open_id_config->provider_config->trust_self_signed_certificate
