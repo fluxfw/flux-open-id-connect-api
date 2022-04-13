@@ -5,6 +5,7 @@ namespace FluxOpenIdConnectApi\Adapter\Api;
 use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
 
 class OpenIdConnectApi
 {
@@ -79,6 +80,14 @@ class OpenIdConnectApi
 
     private function getRequestService() : RequestService
     {
-        return RequestService::new();
+        return RequestService::new(
+            $this->getRestApi()
+        );
+    }
+
+
+    private function getRestApi() : RestApi
+    {
+        return RestApi::new();
     }
 }
