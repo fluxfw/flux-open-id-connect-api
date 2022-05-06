@@ -28,7 +28,7 @@ class SessionCryptConfigDto
     {
         return static::new(
             ($_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET"] ?? null) ??
-            (($secret_file = $_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET_FILE"] ?? null) !== null && file_exists($secret_file) ? (file_get_contents($secret_file) ?: "") : null),
+            (($secret_file = $_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_SECRET_FILE"] ?? null) !== null && file_exists($secret_file) ? rtrim(file_get_contents($secret_file) ?: "", "\n\r") : null),
             $_ENV["FLUX_OPEN_ID_CONNECT_API_SESSION_CRYPT_METHOD"] ?? null
         );
     }
