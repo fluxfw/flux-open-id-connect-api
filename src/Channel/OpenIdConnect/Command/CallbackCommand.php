@@ -7,6 +7,7 @@ use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Authorization\ParseHttp\ParseHttpAuthorization_;
 use Throwable;
 
 class CallbackCommand
@@ -99,7 +100,7 @@ class CallbackCommand
                 throw new Exception("Invalid access token");
             }
 
-            $session["authorization"] = $token_type . " " . $access_token;
+            $session["authorization"] = $token_type . ParseHttpAuthorization_::SPLIT_SCHEMA_PARAMETERS . $access_token;
 
             $redirect_url = $this->route_config->after_login_url;
         } catch (Throwable $ex) {
