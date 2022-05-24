@@ -6,7 +6,7 @@ use Exception;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Body\Type\DefaultBodyType;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Client\ClientRequestDto;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Header\DefaultHeader;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Header\DefaultHeaderKey;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Method\DefaultMethod;
 
 class RequestCommand
@@ -31,17 +31,17 @@ class RequestCommand
     public function request(string $url, ?array $query_params, ?string $authorization, ?array $post_data, ?bool $trust_self_signed_certificate) : array
     {
         $headers = [
-            DefaultHeader::ACCEPT->value     => DefaultBodyType::JSON->value,
-            DefaultHeader::USER_AGENT->value => "flux-open-id-connect-api"
+            DefaultHeaderKey::ACCEPT->value     => DefaultBodyType::JSON->value,
+            DefaultHeaderKey::USER_AGENT->value => "flux-open-id-connect-api"
         ];
 
         if (!empty($authorization)) {
-            $headers[DefaultHeader::AUTHORIZATION->value] = $authorization;
+            $headers[DefaultHeaderKey::AUTHORIZATION->value] = $authorization;
         }
 
         if ($post_data !== null) {
             $method = DefaultMethod::POST;
-            $headers[DefaultHeader::CONTENT_TYPE->value] = DefaultBodyType::JSON->value;
+            $headers[DefaultHeaderKey::CONTENT_TYPE->value] = DefaultBodyType::JSON->value;
             $post_data = json_encode($post_data, JSON_UNESCAPED_SLASHES);
         } else {
             $method = DefaultMethod::GET;
