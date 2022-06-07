@@ -61,7 +61,7 @@ class RequestCommand
             )
         );
 
-        if (empty($response = $response?->getBody()) || empty($response = json_decode($response, true))) {
+        if (empty($response = $response?->body) || empty($response = json_decode($response, true))) {
             throw new Exception("Invalid response");
         }
 
