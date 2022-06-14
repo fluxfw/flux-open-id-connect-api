@@ -2,7 +2,6 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Api;
 
-use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
 use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
 use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
@@ -41,7 +40,7 @@ class OpenIdConnectApi
     }
 
 
-    public function getUserInfos(?string $encrypted_session) : ?UserInfosDto
+    public function getUserInfos(?string $encrypted_session) : array
     {
         return $this->getOpenIdConnectService()
             ->getUserInfos(
