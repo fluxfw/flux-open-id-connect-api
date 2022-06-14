@@ -101,6 +101,7 @@ class CallbackCommand
             }
 
             $session["authorization"] = $token_type . ParseHttpAuthorization_::SPLIT_SCHEMA_PARAMETERS . $access_token;
+            $session["refresh_token"] = $token["refresh_token"] ?? null;
 
             $redirect_url = $this->route_config->after_login_url;
         } catch (Throwable $ex) {
