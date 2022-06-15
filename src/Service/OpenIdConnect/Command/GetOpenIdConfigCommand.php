@@ -1,10 +1,10 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
+namespace FluxOpenIdConnectApi\Service\OpenIdConnect\Command;
 
 use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Provider\ProviderConfigDto;
-use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
+use FluxOpenIdConnectApi\Service\Request\Port\RequestService;
 
 class GetOpenIdConfigCommand
 {

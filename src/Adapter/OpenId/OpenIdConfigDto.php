@@ -5,9 +5,9 @@ namespace FluxOpenIdConnectApi\Adapter\OpenId;
 use FluxOpenIdConnectApi\Adapter\Provider\ProviderConfigDto;
 use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\PlainSessionCrypt;
-use FluxOpenIdConnectApi\Channel\OpenIdConnect\Port\OpenIdConnectService;
-use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
+use FluxOpenIdConnectApi\Service\OpenIdConnect\Port\OpenIdConnectService;
+use FluxOpenIdConnectApi\Service\Request\Port\RequestService;
 
 class OpenIdConfigDto
 {
