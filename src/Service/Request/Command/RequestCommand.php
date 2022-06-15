@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Channel\Request\Command;
+namespace FluxOpenIdConnectApi\Service\Request\Command;
 
 use Exception;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;

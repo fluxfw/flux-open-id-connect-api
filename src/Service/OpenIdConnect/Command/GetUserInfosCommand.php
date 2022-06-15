@@ -1,14 +1,14 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
+namespace FluxOpenIdConnectApi\Service\OpenIdConnect\Command;
 
 use Exception;
 use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
-use FluxOpenIdConnectApi\Channel\Request\Port\RequestService;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Authorization\ParseHttp\ParseHttpAuthorization_;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Status\DefaultStatus;
+use FluxOpenIdConnectApi\Service\Request\Port\RequestService;
 use Throwable;
 
 class GetUserInfosCommand

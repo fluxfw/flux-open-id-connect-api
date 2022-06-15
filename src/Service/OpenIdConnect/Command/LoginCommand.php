@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Channel\OpenIdConnect\Command;
+namespace FluxOpenIdConnectApi\Service\OpenIdConnect\Command;
 
 use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;

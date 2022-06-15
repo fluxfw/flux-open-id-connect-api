@@ -1,9 +1,9 @@
 <?php
 
-namespace FluxOpenIdConnectApi\Channel\Request\Port;
+namespace FluxOpenIdConnectApi\Service\Request\Port;
 
-use FluxOpenIdConnectApi\Channel\Request\Command\RequestCommand;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
+use FluxOpenIdConnectApi\Service\Request\Command\RequestCommand;
 
 class RequestService
 {
