@@ -4,6 +4,7 @@ namespace FluxOpenIdConnectApi\Service\Request\Command;
 
 use Exception;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
+use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Body\JsonBodyDto;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Body\Type\DefaultBodyType;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Client\ClientRequestDto;
 use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Header\DefaultHeaderKey;
@@ -41,8 +42,9 @@ class RequestCommand
 
         if ($post_data !== null) {
             $method = DefaultMethod::POST;
-            $headers[DefaultHeaderKey::CONTENT_TYPE->value] = DefaultBodyType::JSON->value;
-            $post_data = json_encode($post_data, JSON_UNESCAPED_SLASHES);
+            $post_data = JsonBodyDto::new(
+                $post_data
+            );
         } else {
             $method = DefaultMethod::GET;
         }
@@ -52,8 +54,10 @@ class RequestCommand
                 $url,
                 $method,
                 $query_params,
-                $post_data,
+                null,
                 $headers,
+                $post_data,
+                null,
                 true,
                 true,
                 false,
@@ -61,7 +65,7 @@ class RequestCommand
             )
         );
 
-        if (empty($response = $response?->body) || empty($response = json_decode($response, true))) {
+        if (empty($response = $response?->raw_body) || empty($response = json_decode($response, true))) {
             throw new Exception("Invalid response");
         }
 
