@@ -7,12 +7,6 @@ Open Id Connect Api
 ### Non-Composer
 
 ```dockerfile
-COPY --from=docker-registry.fluxpublisher.ch/flux-open-id-connect-api:%tag% /flux-open-id-connect-api /%path%/libs/flux-open-id-connect-api
-```
-
-or
-
-```dockerfile
 RUN (mkdir -p /%path%/libs/flux-open-id-connect-api && cd /%path%/libs/flux-open-id-connect-api && wget -O - https://github.com/flux-eco/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz | tar -xz --strip-components=1)
 ```
 
