@@ -58,6 +58,7 @@ class RequestCommand
                 $headers,
                 $post_data,
                 null,
+                null,
                 true,
                 true,
                 false,
