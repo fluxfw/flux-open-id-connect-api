@@ -4,7 +4,9 @@ Open Id Connect Api
 
 ## Installation
 
-### Non-Composer
+### Native
+
+#### Download
 
 ```dockerfile
 RUN (mkdir -p /%path%/libs/flux-open-id-connect-api && cd /%path%/libs/flux-open-id-connect-api && wget -O - https://github.com/flux-eco/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz | tar -xz --strip-components=1)
@@ -14,7 +16,7 @@ or
 
 Download https://github.com/flux-eco/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz and extract it to `/%path%/libs/flux-open-id-connect-api`
 
-#### Usage
+#### Load
 
 ```php
 require_once __DIR__ . "/%path%/libs/flux-open-id-connect-api/autoload.php";
