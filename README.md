@@ -9,12 +9,12 @@ Open Id Connect Api
 #### Download
 
 ```dockerfile
-RUN (mkdir -p /%path%/libs/flux-open-id-connect-api && cd /%path%/libs/flux-open-id-connect-api && wget -O - https://github.com/flux-eco/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz | tar -xz --strip-components=1)
+RUN (mkdir -p /%path%/libs/flux-open-id-connect-api && cd /%path%/libs/flux-open-id-connect-api && wget -O - https://github.com/fluxfw/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz | tar -xz --strip-components=1)
 ```
 
 or
 
-Download https://github.com/flux-eco/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz and extract it to `/%path%/libs/flux-open-id-connect-api`
+Download https://github.com/fluxfw/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz and extract it to `/%path%/libs/flux-open-id-connect-api`
 
 #### Load
 
@@ -33,7 +33,7 @@ require_once __DIR__ . "/%path%/libs/flux-open-id-connect-api/autoload.php";
                 "name": "flux/flux-open-id-connect-api",
                 "version": "%tag%",
                 "dist": {
-                    "url": "https://github.com/flux-eco/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz",
+                    "url": "https://github.com/fluxfw/flux-open-id-connect-api/releases/download/%tag%/flux-open-id-connect-api-%tag%-build.tar.gz",
                     "type": "tar"
                 },
                 "autoload": {
@@ -71,4 +71,4 @@ Minimal variables required to set are **bold**
 
 ## Example
 
-Look at [flux-open-id-connect-rest-api](https://github.com/flux-caps/flux-open-id-connect-rest-api)
+Look at [flux-open-id-connect-rest-api](https://github.com/fluxfw/flux-open-id-connect-rest-api)
