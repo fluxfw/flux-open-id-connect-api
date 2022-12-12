@@ -2,6 +2,8 @@
 
 namespace FluxOpenIdConnectApi\Adapter\SessionCrypt;
 
+use SensitiveParameter;
+
 class SessionCryptConfigDto
 {
 
@@ -14,7 +16,7 @@ class SessionCryptConfigDto
 
 
     public static function new(
-        string $secret,
+        #[SensitiveParameter] string $secret,
         ?string $method = null
     ) : static {
         return new static(
