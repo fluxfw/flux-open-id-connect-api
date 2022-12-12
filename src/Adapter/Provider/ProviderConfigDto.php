@@ -2,6 +2,8 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Provider;
 
+use SensitiveParameter;
+
 class ProviderConfigDto
 {
 
@@ -21,7 +23,7 @@ class ProviderConfigDto
     public static function new(
         string $url,
         string $client_id,
-        string $client_secret,
+        #[SensitiveParameter] string $client_secret,
         string $redirect_uri,
         ?string $scope,
         ?bool $supports_pkce,
