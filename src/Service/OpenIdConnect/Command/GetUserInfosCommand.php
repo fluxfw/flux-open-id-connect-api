@@ -6,9 +6,9 @@ use Exception;
 use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
 use FluxOpenIdConnectApi\Adapter\UserInfo\UserInfosDto;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Authorization\ParseHttp\ParseHttpAuthorization_;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Status\DefaultStatus;
 use FluxOpenIdConnectApi\Service\Request\Port\RequestService;
+use FluxRestApi\Adapter\Authorization\ParseHttp\ParseHttpAuthorization_;
+use FluxRestApi\Adapter\Status\DefaultStatus;
 use Throwable;
 
 class GetUserInfosCommand

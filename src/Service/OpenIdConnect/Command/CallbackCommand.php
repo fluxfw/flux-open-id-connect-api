@@ -6,8 +6,8 @@ use Exception;
 use FluxOpenIdConnectApi\Adapter\OpenId\OpenIdConfigDto;
 use FluxOpenIdConnectApi\Adapter\Route\RouteConfigDto;
 use FluxOpenIdConnectApi\Adapter\SessionCrypt\SessionCrypt;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Authorization\ParseHttp\ParseHttpAuthorization_;
 use FluxOpenIdConnectApi\Service\Request\Port\RequestService;
+use FluxRestApi\Adapter\Authorization\ParseHttp\ParseHttpAuthorization_;
 use Throwable;
 
 class CallbackCommand

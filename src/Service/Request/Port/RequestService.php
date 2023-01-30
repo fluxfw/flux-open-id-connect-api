@@ -2,8 +2,8 @@
 
 namespace FluxOpenIdConnectApi\Service\Request\Port;
 
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
 use FluxOpenIdConnectApi\Service\Request\Command\RequestCommand;
+use FluxRestApi\Adapter\Api\RestApi;
 
 class RequestService
 {

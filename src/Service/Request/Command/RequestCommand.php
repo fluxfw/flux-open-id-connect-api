@@ -3,12 +3,12 @@
 namespace FluxOpenIdConnectApi\Service\Request\Command;
 
 use Exception;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Body\JsonBodyDto;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Body\Type\DefaultBodyType;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Client\ClientRequestDto;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Header\DefaultHeaderKey;
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Method\DefaultMethod;
+use FluxRestApi\Adapter\Api\RestApi;
+use FluxRestApi\Adapter\Body\JsonBodyDto;
+use FluxRestApi\Adapter\Body\Type\DefaultBodyType;
+use FluxRestApi\Adapter\Client\ClientRequestDto;
+use FluxRestApi\Adapter\Header\DefaultHeaderKey;
+use FluxRestApi\Adapter\Method\DefaultMethod;
 
 class RequestCommand
 {
@@ -32,8 +32,7 @@ class RequestCommand
     public function request(string $url, ?array $query_params, ?string $authorization, ?array $post_data, ?bool $trust_self_signed_certificate) : array
     {
         $headers = [
-            DefaultHeaderKey::ACCEPT->value     => DefaultBodyType::JSON->value,
-            DefaultHeaderKey::USER_AGENT->value => "flux-open-id-connect-api"
+            DefaultHeaderKey::ACCEPT->value     => DefaultBodyType::JSON->value
         ];
 
         if (!empty($authorization)) {
