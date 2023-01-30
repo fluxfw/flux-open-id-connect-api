@@ -2,9 +2,9 @@
 
 namespace FluxOpenIdConnectApi\Adapter\Api;
 
-use FluxOpenIdConnectApi\Libs\FluxRestApi\Adapter\Api\RestApi;
 use FluxOpenIdConnectApi\Service\OpenIdConnect\Port\OpenIdConnectService;
 use FluxOpenIdConnectApi\Service\Request\Port\RequestService;
+use FluxRestApi\Adapter\Api\RestApi;
 
 class OpenIdConnectApi
 {

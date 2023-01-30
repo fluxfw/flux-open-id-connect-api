@@ -2,32 +2,8 @@
 
 namespace FluxOpenIdConnectApi;
 
-require_once __DIR__ . "/../libs/flux-autoload-api/autoload.php";
-require_once __DIR__ . "/../libs/flux-rest-api/autoload.php";
-
-use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
-use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
-use FluxOpenIdConnectApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
-
-PhpVersionChecker::new(
-    ">=8.2"
-)
-    ->checkAndDie(
-        __NAMESPACE__
-    );
-PhpExtChecker::new(
-    [
-        "json",
-        "openssl"
-    ]
-)
-    ->checkAndDie(
-        __NAMESPACE__
-    );
-
-Psr4Autoload::new(
-    [
-        __NAMESPACE__ => __DIR__
-    ]
-)
-    ->autoload();
+spl_autoload_register(function (string $class) : void {
+    if (str_starts_with($class, __NAMESPACE__ . "\\")) {
+        require_once __DIR__ . str_replace("\\", "/", substr($class, strlen(__NAMESPACE__))) . ".php";
+    }
+});
